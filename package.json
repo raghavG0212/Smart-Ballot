@@ -1,0 +1,38 @@
+{
+  "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-regular-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "bcrypt": "^5.1.1",
+    "colors": "^1.4.0",
+    "concurrently": "^8.2.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "fontawesome": "^5.6.3",
+    "fortawesome": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.6.0",
+    "mysql2": "^3.11.0",
+    "nodemon": "^3.1.4"
+  },
+  "name": "genpactproject",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "start": "nodemon server.js",
+    "client": "npm run dev --prefix client",
+    "server": "nodemon server.js",
+    "happy_voting": "concurrently \"npm run client\" \"npm run server\""
+  },
+  "keywords": [],
+  "author": "Raghav Goel",
+  "license": "ISC",
+  "description": "This is a Voting System which has abililty to create and execute fair elections with functionalities to either login as admin or voter which have different prospectives throughout the app."
+}
