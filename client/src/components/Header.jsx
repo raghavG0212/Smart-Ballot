@@ -64,7 +64,7 @@ export default function Header() {
               <div className="relative group">
                 <Avatar
                   alt="Your Profile"
-                  img="/homepage/user_icon.jpg"
+                  img="/user_icon.jpg"
                   rounded
                   className="transition-all duration-300"
                 />

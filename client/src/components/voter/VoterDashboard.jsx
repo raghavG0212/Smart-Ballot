@@ -90,7 +90,7 @@ export default function VoterDashboard() {
                     {candidate.partyName}
                   </Table.Cell>
                   <Table.Cell className="hidden sm:table-cell border-r">
-                    <div className="ml-3 md:ml-0 880px:ml-3 border-2 h-11 w-16 border-black flex justify-center bg-white">
+                    <div className="ml-3 md:ml-0 880px:ml-3 border-2 h-11 w-16 border-black flex justify-center bg-white dark:border-gray-700">
                       <img
                         src={candidate.partyLogo}
                         alt={candidate.partyName}

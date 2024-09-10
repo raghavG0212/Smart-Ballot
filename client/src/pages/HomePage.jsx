@@ -67,7 +67,7 @@ export default function HomePage() {
   };
   return (
     <div className="flex-col">
-      <div className="flex md:flex-row flex-col md:justify-between">
+      <div className="flex md:flex-row flex-col lg:justify-evenly md:justify-between">
         {!currentUser ? (
           <div className="flex flex-col space-y-10 items-center text-center justify-center mt-10 md:mt-0 md:text-5xl text-3xl">
             <h1 className="font-bold uppercase">Login To Cast Vote</h1>
@@ -88,16 +88,16 @@ export default function HomePage() {
           </div>
         ) : (
           <div className="flex flex-col ml-10 space-y-10 items-center text-center justify-center mt-10 md:mt-0">
-            <div className="flex flex-col">
-              <span className="font-bold text-orange-500 md:text-5xl text-4xl mb-3">
+            <div className="flex flex-col uppercase">
+              <span className="font-bold text-orange-500 md:text-6xl text-5xl mb-3">
                 Welcome
               </span>
-              <span className="font-bold text-green-600 md:text-4xl text-3xl ">
+              <span className="font-bold text-green-600 md:text-5xl text-4xl ">
                 {currentUser.name}
               </span>
             </div>
             <Link
-              to={isAdmin ? "/admin-candidate-management" : "voter-dashboard"}
+              to={isAdmin ? "/admin-candidate-management" : "/voter-dashboard"}
             >
               <Button gradientDuoTone="purpleToBlue" outline className="w-52">
                 Go to Dashboard
@@ -108,8 +108,18 @@ export default function HomePage() {
         {currentUser && !isAdmin && voteCasted ? (
           <></>
         ) : (
-          <div className="mt-4 sm:mt-20">
-            <img src="/main.webp" alt="vote" />
+          <div className="mt-20 home-text">
+            <h1 className="text-center capitalize mb-10 text-5xl md:hidden custom-title text-pretty">
+              Cast Your Vote, Make a Difference
+            </h1>
+
+            <div className="flex justify-center">
+              <img
+                src="/main.jpg"
+                alt="vote"
+                className="rounded-full w-10/12 h-10/12 md:w-full border-4 border-black dark:border-gray-700"
+              />
+            </div>
           </div>
         )}
       </div>

@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.custom-title {
+	font-family: "Cairo";
+	background-image: url('https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif');
+	background-size: cover;
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+	text-transform: uppercase;
+	display: inline-block;
+	line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+	.custom-title {
+		display: none;
+	}
+}

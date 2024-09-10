@@ -209,7 +209,7 @@ export default function AdminDashBoard() {
                       {candidate.partyName}
                     </Table.Cell>
                     <Table.Cell className="hidden sm:table-cell border-r">
-                      <div className="border-2 h-11 w-16 border-black 1016px:ml-3 lg:ml-0 1096.5px:ml-3 flex justify-center bg-white">
+                      <div className="border-2 h-11 w-16 border-black 1016px:ml-3 lg:ml-0 1096.5px:ml-3 flex justify-center bg-white dark:border-gray-700">
                         <img
                           src={candidate.partyLogo}
                           alt={candidate.partyName}
