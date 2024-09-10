@@ -16,10 +16,10 @@ const createCandidate = async (req, res) => {
     const { name, dob, nationality, partyName, partyLogo } = req.body;
     const age = calculateAge(dob);
     if (age < 35) {
-      return res.status(400).json({ message: "Age  atleast 35." });
+      return res.status(400).json({ message: "Age should be atleast 35." });
     }
     if (nationality != "Indian") {
-      return res.status(400).json({ message: "Candidate  Indian." });
+      return res.status(400).json({ message: "Candidate must be Indian." });
     }
     const existingCandidateName = await CandidateModel.findOne({ name });
     const existingCandidatePartyName = await CandidateModel.findOne({

@@ -4,7 +4,7 @@
 
 .custom-title {
 	font-family: "Cairo";
-	background-image: url('https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif');
+	background-image: url('/main_text.webp');
 	background-size: cover;
 	background-clip: text;
 	-webkit-background-clip: text;
