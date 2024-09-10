@@ -469,7 +469,14 @@ export default function AdminDashBoard() {
                 outline
                 onClick={handleEditCandidate}
               >
-                Update
+                {loading ? (
+                  <>
+                    <Spinner size="sm" />
+                    <span className="pl-3">Loading...</span>
+                  </>
+                ) : (
+                  "Update"
+                )}
               </Button>
               <Button
                 color="failure"
@@ -495,11 +502,18 @@ export default function AdminDashBoard() {
           <div className="text-center">
             <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
             <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Are You Sure ?
+              Are You Sure , You Want to Delete this Candidate?
             </h3>
             <div className="flex justify-center gap-8">
               <Button color="success" outline onClick={handleDeleteCandidate}>
-                {"Yes, I'm sure"}
+                {loading ? (
+                  <>
+                    <Spinner size="sm" />
+                    <span className="pl-3">Loading...</span>
+                  </>
+                ) : (
+                  "Yes I'm Sure"
+                )}
               </Button>
               <Button
                 color="failure"

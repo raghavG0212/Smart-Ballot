@@ -71,5 +71,31 @@ const updateAdmin= async(req,res)=>{
 
 }
 
+const getAllAdmins = async (req, res) => {
+  try {
+    const admins = await AdminModel.find();
+    res.status(200).json(admins);
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
 
-module.exports= {createAdmin,updateAdmin,adminLogin};
+const deleteAdmin = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const admin = await AdminModel.findById(id);
+    if (!admin) {
+      return res.status(404).json({ message: "Candidate not found" });
+    }
+    await AdminModel.findByIdAndDelete(id);
+
+    res.status(200).json({ message: "Admin deleted successfully" });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Error deleting admin", error: err.message });
+  }
+};
+
+module.exports= {createAdmin,updateAdmin,adminLogin,getAllAdmins,deleteAdmin};

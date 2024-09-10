@@ -31,10 +31,10 @@ const signup = async (req, res) => {
     const { name, dob, phoneNo, aadharNo, password, nationality } = req.body;
     const age = calculateAge(dob);
     if (age < 18) {
-      return res.status(400).json({ message: "Voter  at least 18 years old" });
+      return res.status(400).json({ message: "Voter should be at least 18 years old" });
     }
     if (nationality !== "Indian") {
-      return res.status(400).json({ message: "Nationality  Indian" });
+      return res.status(400).json({ message: "Nationality must be Indian" });
     }
     if (password.length < 8) {
       return res

@@ -99,8 +99,8 @@ export default function HomePage() {
             <Link
               to={isAdmin ? "/admin-candidate-management" : "/voter-dashboard"}
             >
-              <Button gradientDuoTone="purpleToBlue" outline className="w-52">
-                Go to Dashboard
+              <Button gradientDuoTone="purpleToBlue" outline className="w-52 uppercase font-semibold">
+                {!isAdmin ? "Click Here To Vote" : "Go to Dashboard"}
               </Button>
             </Link>
           </div>
@@ -117,7 +117,7 @@ export default function HomePage() {
               <img
                 src="/main.jpg"
                 alt="vote"
-                className="rounded-full w-10/12 h-10/12 md:w-full border-4 border-black dark:border-gray-700"
+                className="rounded-full w-10/12 h-10/12 md:w-full border-4 border-black dark:border-amber-600"
               />
             </div>
           </div>

@@ -19,9 +19,8 @@ export default function FooterCom() {
               to="/"
               className="self-center whitespace-nowrap text-lg sm:text-xl font-semibold dark:text-white"
             >
-              <span className="p-2 bg-gradient-to-r from-orange-500 via-white to-green-700 rounded-lg text-blue-900 italic font-semibold border-2 border-blue-950">
-                <span className="mr-1 text-green-900">Voting</span>
-                <span className="text-orange-600">System</span>
+              <span className="p-2 bg-gradient-to-r from-orange-500 via-white to-green-700 rounded-lg font-semibold border-2 border-black text-black">
+                <span className="mr-1 text-2xl">Voting System</span>
               </span>
               {/* <span>Voting System</span> */}
             </Link>
