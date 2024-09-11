@@ -185,7 +185,9 @@ export default function AdminDashBoard() {
                 S No.
               </Table.HeadCell>
               <Table.HeadCell className="border-r">Name</Table.HeadCell>
-              <Table.HeadCell className="border-r">Party Name</Table.HeadCell>
+              <Table.HeadCell className="border-r hidden 450px:table-cell">
+                Party Name
+              </Table.HeadCell>
               <Table.HeadCell className="hidden sm:block border-r">
                 Party Logo
               </Table.HeadCell>
@@ -202,10 +204,13 @@ export default function AdminDashBoard() {
                     <Table.Cell className="text-lg font-bold hidden lg:table-cell align-middle border-r">
                       {index + 1}
                     </Table.Cell>
-                    <Table.Cell className="uppercase font-semibold border-r">
-                      {candidate.name}
+                    <Table.Cell className="border-r flex flex-col">
+                      <span className="uppercase font-semibold ">
+                        {candidate.name}
+                      </span>
+                      <span className="450px:hidden">({candidate.partyName})</span>
                     </Table.Cell>
-                    <Table.Cell className="border-r">
+                    <Table.Cell className="border-r hidden 450px:table-cell">
                       {candidate.partyName}
                     </Table.Cell>
                     <Table.Cell className="hidden sm:table-cell border-r">
@@ -224,8 +229,7 @@ export default function AdminDashBoard() {
                       <div className="flex flex-col md:flex-row md:space-x-2 space-y-1 md:space-y-0">
                         <Button
                           color="success"
-                          size="xs"
-                          pill
+                          size="sm"
                           onClick={() => {
                             setOpenEditModal(true);
                             setCandidateToEdit(candidate._id);
@@ -235,8 +239,7 @@ export default function AdminDashBoard() {
                         </Button>
                         <Button
                           color="failure"
-                          size="xs"
-                          pill
+                          size="sm"
                           onClick={() => {
                             setOpenDeleteModal(true);
                             setCandidateToDelete(candidate._id);
