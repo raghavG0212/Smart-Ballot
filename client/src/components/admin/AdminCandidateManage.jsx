@@ -204,11 +204,15 @@ export default function AdminDashBoard() {
                     <Table.Cell className="text-lg font-bold hidden lg:table-cell align-middle border-r">
                       {index + 1}
                     </Table.Cell>
-                    <Table.Cell className="border-r flex flex-col">
-                      <span className="uppercase font-semibold ">
-                        {candidate.name}
-                      </span>
-                      <span className="450px:hidden">({candidate.partyName})</span>
+                    <Table.Cell className="border-r">
+                      <div className="flex flex-col">
+                        <span className="uppercase font-semibold ">
+                          {candidate.name}
+                        </span>
+                        <span className="450px:hidden">
+                          ({candidate.partyName})
+                        </span>
+                      </div>
                     </Table.Cell>
                     <Table.Cell className="border-r hidden 450px:table-cell">
                       {candidate.partyName}
