@@ -87,7 +87,7 @@ export default function HomePage() {
             <AlreadyVoted />
           </div>
         ) : (
-          <div className="flex flex-col ml-10 space-y-10 items-center text-center justify-center mt-10 md:mt-0">
+          <div className="flex flex-col sm:ml-10 space-y-10 items-center text-center justify-center mt-10 md:mt-0">
             <div className="flex flex-col uppercase">
               <span className="font-bold text-orange-500 md:text-6xl text-5xl mb-3">
                 Welcome
