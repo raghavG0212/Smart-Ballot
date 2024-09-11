@@ -25,7 +25,7 @@ export default function VotingSuccessPage() {
       setError(null);
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/v1/voter/get-voter",
+          "/api/v1/voter/get-voter",
           {
             params: { voterID: currentUser.voterID },
           }

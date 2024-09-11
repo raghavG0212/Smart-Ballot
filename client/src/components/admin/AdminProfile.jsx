@@ -19,7 +19,7 @@ export default function AdminProfile() {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:4000/api/v1/admin/update-admin/${currentUser._id}`,
+        `/api/v1/admin/update-admin/${currentUser._id}`,
         {
           method: "PUT",
           headers: {

@@ -29,7 +29,7 @@ export default function AdminMainDash() {
       try {
         setLoading(true);
         const response = await axios.get(
-          "http://localhost:4000/api/v1/admin/getAdmins"
+          "/api/v1/admin/getAdmins"
         );
         setAdmins(response.data);
         setLoading(false);
@@ -47,7 +47,7 @@ export default function AdminMainDash() {
       try {
         setLoading(true);
         const response = await axios.get(
-          "http://localhost:4000/api/v1/candidate/getCandidates"
+          "/api/v1/candidate/getCandidates"
         );
         const candidatesData = response.data;
         setCandidates(candidatesData);
@@ -104,11 +104,11 @@ export default function AdminMainDash() {
     setError(null);
     try {
       const response = await axios.delete(
-        `http://localhost:4000/api/v1/admin/delete-admin/${adminToDelete}`
+        `/api/v1/admin/delete-admin/${adminToDelete}`
       );
       setOpenDeleteModal(false);
       const updatedAdmins = await axios.get(
-        "http://localhost:4000/api/v1/admin/getAdmins"
+        "/api/v1/admin/getAdmins"
       );
       setAdmins(updatedAdmins.data);
       setTimeout(() => {

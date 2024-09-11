@@ -24,7 +24,7 @@ export default function VoterDashboard() {
       try {
         setLoading(true);
         const response = await axios.get(
-          "http://localhost:4000/api/v1/candidate/getCandidates"
+          "/api/v1/candidate/getCandidates"
         );
         setCandidates(response.data);
       } catch (err) {
@@ -40,7 +40,7 @@ export default function VoterDashboard() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:4000/api/v1/voter/cast-vote",
+        "/api/v1/voter/cast-vote",
         {
           voterID: currentUser.voterID,
           candidateID: candidateID,

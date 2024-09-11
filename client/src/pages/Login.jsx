@@ -35,7 +35,7 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:4000/api/v1/voter/login", {
+      const response = await fetch("/api/v1/voter/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

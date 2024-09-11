@@ -28,7 +28,7 @@ export default function AdminLogin({ setIsAdmin }) {
 
     try {
       const response = await fetch(
-        "http://localhost:4000/api/v1/admin/admin-login",
+        "/api/v1/admin/admin-login",
         {
           method: "POST",
           headers: {

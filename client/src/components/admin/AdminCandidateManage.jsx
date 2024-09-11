@@ -49,7 +49,7 @@ export default function AdminDashBoard() {
       try {
         setLoading(true);
         const response = await axios.get(
-          "http://localhost:4000/api/v1/candidate/getCandidates"
+          "/api/v1/candidate/getCandidates"
         );
         setCandidates(response.data);
         setLoading(false);
@@ -74,7 +74,7 @@ export default function AdminDashBoard() {
         partyLogoURL = await getDownloadURL(snapshot.ref);
       }
       const response = await axios.post(
-        "http://localhost:4000/api/v1/candidate/create-candidate",
+        "/api/v1/candidate/create-candidate",
         {
           name: formData.name,
           dob: formData.dob,
@@ -84,7 +84,7 @@ export default function AdminDashBoard() {
         }
       );
       const updatedCandidates = await axios.get(
-        "http://localhost:4000/api/v1/candidate/getCandidates"
+        "/api/v1/candidate/getCandidates"
       );
       setCandidates(updatedCandidates.data);
       setLoading(false);
@@ -110,7 +110,7 @@ export default function AdminDashBoard() {
         partyLogoURL = await getDownloadURL(snapshot.ref);
       }
       const response = await fetch(
-        `http://localhost:4000/api/v1/candidate/update-candidate/${candidateToEdit}`,
+        `/api/v1/candidate/update-candidate/${candidateToEdit}`,
         {
           method: "PUT",
           headers: {
@@ -127,7 +127,7 @@ export default function AdminDashBoard() {
       if (response.ok) {
         setLoading(false);
         const updatedCandidates = await axios.get(
-          "http://localhost:4000/api/v1/candidate/getCandidates"
+          "/api/v1/candidate/getCandidates"
         );
         setCandidates(updatedCandidates.data);
         setOpenEditModal(false);
@@ -150,11 +150,11 @@ export default function AdminDashBoard() {
     setError(null);
     try {
       const response = await axios.delete(
-        `http://localhost:4000/api/v1/candidate/delete-candidate/${candidateToDelete}`
+        `/api/v1/candidate/delete-candidate/${candidateToDelete}`
       );
       setOpenDeleteModal(false);
       const updatedCandidates = await axios.get(
-        "http://localhost:4000/api/v1/candidate/getCandidates"
+        "/api/v1/candidate/getCandidates"
       );
       setCandidates(updatedCandidates.data);
       setTimeout(() => {

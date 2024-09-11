@@ -38,7 +38,7 @@ export default function Login() {
     setLoading(true);
     try {
       const response = await fetch(
-        "http://localhost:4000/api/v1/voter/signup",
+        "/api/v1/voter/signup",
         {
           method: "POST",
           headers: {
