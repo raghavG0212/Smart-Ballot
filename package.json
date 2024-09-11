@@ -23,7 +23,7 @@
     "client": "npm run dev --prefix client",
     "server": "nodemon server.js",
     "happy_voting": "concurrently \"npm run client\" \"npm run server\"",
-    "deploy":"npm install && npm install --prefix client && npm run build --prefix client && node server.js"
+    "deploy":"npm install && npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
   "author": "Raghav Goel",
