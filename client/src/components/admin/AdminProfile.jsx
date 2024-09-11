@@ -57,7 +57,7 @@ export default function AdminProfile() {
         <div className="">
           <AdminDropdown />
         </div>
-        <div className="h-screen p-3 shadow m-6 sm:m-20 border dark:border-blue-950 rounded-xl ">
+        <div className=" p-3 shadow m-3 sm:m-20 border dark:border-blue-950 rounded-xl ">
           <h1 className="text-4xl font-semibold text-center uppercase mb-16 mt-2">
             Your Profile
           </h1>
@@ -76,11 +76,11 @@ export default function AdminProfile() {
                 <p className="text-gray-600 dark:text-gray-400">********</p>
               </div>
             </div>
-            <div className="h-72 w-72">
+            <div className="sm:h-72 sm:w-72 h-40 w-40">
               <img src="/admin.webp" alt="admin"></img>
             </div>
           </div>
-          <div className="mt-14 flex justify-center">
+          <div className="mt-14 flex mb-10 justify-center">
             <Button
               gradientDuoTone="redToYellow"
               onClick={() => setOpenEditModal(true)}

@@ -12,7 +12,7 @@ export default function VoterProfile() {
       <VoterSideBar />
       <div className="flex-grow flex-col">
         <VoterDropDown />
-        <div className="h-screen p-3 shadow m-6 sm:m-12 border dark:border-blue-950 rounded-lg">
+        <div className=" p-3 shadow m-6 sm:m-12 border dark:border-blue-950 rounded-lg">
           <h1 className="text-3xl font-semibold text-center uppercase mb-10">
             Your Profile
           </h1>
@@ -49,7 +49,7 @@ export default function VoterProfile() {
                 </p>
               </div>
             </div>
-            <div className="h-72 w-72 mt-4">
+            <div className="h-40 w-40 sm:h-72 sm:w-72 mt-4">
               <img src="/voter.webp" alt="admin"></img>
             </div>
           </div>
