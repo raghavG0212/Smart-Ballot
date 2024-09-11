@@ -191,7 +191,7 @@ export default function Login() {
                 <FaCheckCircle color="green" size="50" />
               </div>
               <h3 className="mb-5 text-2xl font-semibold">
-                Sign Up successful!
+                Sign up successful!
               </h3>
               <div className="justify-center flex">
                 <Button

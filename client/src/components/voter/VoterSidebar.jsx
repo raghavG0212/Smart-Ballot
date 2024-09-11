@@ -44,8 +44,8 @@ export default function VoterSideBar() {
               <div className="flex space-x-16">
                 <div>Elections</div>
                 <div className="relative flex items-center font-bold text-red-600">
-                  <span className="mr-4 font-semibold">Live</span>
-                  <span className="absolute right-0 w-3 h-3 bg-red-600 rounded-full animate-pulse mt-1"></span>
+                  <span className="mr-3 font-semibold">Live</span>
+                  <span className="absolute right-0 w-2 h-2 bg-red-600 rounded-full animate-pulse mt-1"></span>
                 </div>
               </div>
             </Sidebar.Item>

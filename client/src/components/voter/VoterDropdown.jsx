@@ -27,12 +27,11 @@ export default function VoterDropDown() {
               }`}
             >
               <FaPeopleRoof />
-              <span>Elections</span>
               <div className="flex justify-between w-full">
                 <div>Elections</div>
                 <div className="relative flex items-center font-bold text-red-600">
-                  <span className="mr-2 font-semibold">Live</span>
-                  <span className="w-3 h-3 bg-red-600 rounded-full animate-pulse mt-1"></span>
+                  <span className="mr-1 font-semibold">Live</span>
+                  <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse mt-1"></span>
                 </div>
               </div>
             </Link>
