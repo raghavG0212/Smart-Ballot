@@ -16,7 +16,7 @@ import AdminCandidateManage from "./components/admin/AdminCandidateManage";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import AdminProfile from "./components/admin/AdminProfile";
 import OnlyVoter from "./components/PrivateRoutes/OnlyVoter";
-import OnlyAdmin from "./components/PrivateRoutes/onlyAdmin";
+import OnlyAdmin from "./components/PrivateRoutes/OnlyAdmin";
 
 export default function App() {
   return (
