@@ -117,7 +117,7 @@ export default function HomePage() {
               <img
                 src="/main.jpg"
                 alt="vote"
-                className="rounded-full w-10/12 h-10/12 md:w-full border-4 border-black dark:border-amber-600"
+                className="rounded-full w-10/12 h-10/12 md:w-full "
               />
             </div>
           </div>

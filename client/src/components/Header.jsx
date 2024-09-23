@@ -24,14 +24,13 @@ export default function Header() {
   return (
     <Navbar className="border-b-8 p-4 border-teal-500 dark:border-teal-600 bg-slate-200">
       <Link to="/" className="sm:text-xl font-semibold dark:text-white">
-        <span className="p-2 bg-gradient-to-r from-orange-500 via-white to-green-700 rounded-lg font-semibold border-2 border-black text-black">
-          <span className="mr-1 md:text-xl lg:text-2xl ">Voting System</span>
-          {/* <span className="text-orange-600">System</span> */}
+        <span className="p-2 bg-gradient-to-r from-orange-500 via-white to-green-700 rounded-lg font-semibold  text-black">
+          <span className="mr-1 md:text-lg lg:text-xl ">Voting System</span>
         </span>
       </Link>
-      <div className="font-semibold italic mx-auto hidden md:block">
+      <div className="font-semibold italic mx-auto hidden md:block text-xl">
         <Wave
-          text="The ballot is stronger than the bullet.~Abraham Lincoln"
+          text="Cast Your Vote Make A Difference."
           effect="stretch"
           effectChange={2.0}
         />

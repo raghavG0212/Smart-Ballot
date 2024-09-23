@@ -218,11 +218,11 @@ export default function AdminDashBoard() {
                       {candidate.partyName}
                     </Table.Cell>
                     <Table.Cell className="hidden sm:table-cell border-r">
-                      <div className="border-2 h-11 w-16 border-black 1016px:ml-3 lg:ml-0 1096.5px:ml-3 flex justify-center bg-white dark:border-gray-700">
+                      <div className="ml-3 md:ml-0 880px:ml-3 h-12 w-12 flex justify-center items-center bg-white dark:border-gray-700 rounded-full">
                         <img
                           src={candidate.partyLogo}
                           alt={candidate.partyName}
-                          className="h-10 w-15"
+                          className="h-12 w-12 rounded-full"
                         />
                       </div>
                     </Table.Cell>
