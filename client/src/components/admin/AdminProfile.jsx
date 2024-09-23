@@ -25,7 +25,7 @@ export default function AdminProfile() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name: username, password: password }),
+          body: JSON.stringify({ name: username , password: password }),
         }
       );
 
@@ -119,6 +119,7 @@ export default function AdminProfile() {
                     placeholder="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="mt-7 flex justify-center">

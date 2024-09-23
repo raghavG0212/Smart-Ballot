@@ -28,7 +28,7 @@ export default function Header() {
           <span className="mr-1 md:text-lg lg:text-xl ">Voting System</span>
         </span>
       </Link>
-      <div className="font-semibold italic mx-auto hidden md:block text-xl">
+      <div className="font-semibold italic mx-auto hidden md:block text-xl uppercase">
         <Wave
           text="Cast Your Vote Make A Difference."
           effect="stretch"

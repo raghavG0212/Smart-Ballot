@@ -9,7 +9,7 @@ import {
   Spinner,
   Modal,
 } from "flowbite-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
 
 export default function AdminLogin({ setIsAdmin }) {
@@ -60,81 +60,112 @@ export default function AdminLogin({ setIsAdmin }) {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center">
-      <div className="text-center">
-        <h1 className="font-medium italic text-4xl mb-10">LOGIN</h1>
-        <form
-          className="flex max-w-md flex-col gap-4 mt-4 w-80"
-          onSubmit={handleSubmit}
-        >
-          <div>
-            <div className="mb-2 block">
-              <Label htmlFor="username" value="Username" />
-            </div>
-            <TextInput
-              id="username"
-              type="text"
-              placeholder="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
+    <div className="flex min-h-screen lg:justify-between justify-center">
+      <div className="hidden bg-blue-100 h-screen w-1/2 left-0 lg:flex justify-center items-center">
+        <img
+          src="/userlog.jpg"
+          alt="sign-in"
+          className="w-5/6 h-5/6 rounded-3xl"
+        />
+      </div>
+      <div className="flex items-center justify-center sm:mr-20">
+        <div className="text-center">
+          <div className="font-medium text-4xl mb-20 mt-12 capitalize flex flex-col">
+            <span>Welcome Admin</span>
+            <span className="text-blue-600 italic">log into your account</span>
           </div>
-          <div>
-            <div className="mb-2 block">
-              <Label htmlFor="password" value="Password" />
-            </div>
-            <TextInput
-              id="password"
-              type="password"
-              placeholder="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div className="flex items-center gap-2">
-            <Checkbox id="remember" />
-            <Label htmlFor="remember">Remember me</Label>
-          </div>
-          <Button
-            type="submit"
-            gradientDuoTone="purpleToPink"
-            disabled={loading}
+          <form
+            className="flex max-w-md flex-col gap-4 mt-4 w-80 items-center sm:items-start"
+            onSubmit={handleSubmit}
           >
-            {loading ? (
-              <>
-                <Spinner size="sm" />
-                <span className="pl-3">Loading...</span>
-              </>
-            ) : (
-              "Submit"
-            )}
-          </Button>
-        </form>
-
-        {error && <p className="text-red-500 mt-4">{error}</p>}
-
-        <Modal show={showModal} size="md" popup onClose={handleModalClose}>
-          <Modal.Header />
-          <Modal.Body>
-            <div className="text-center mx-auto space-y-5">
-              <div className="flex justify-center">
-                <FaCheckCircle color="green" size="50" />
+            <div className="sm:flex space-x-10">
+              <div className="block mt-2">
+                <Label
+                  htmlFor="username"
+                  value="Username"
+                  className="text-md"
+                />
               </div>
-              <h3 className="mb-5 text-2xl font-semibold">Login successful!</h3>
-              <div className="justify-center flex">
-                <Button
-                  gradientDuoTone="tealToLime"
-                  onClick={handleModalClose}
-                  pill
-                >
-                  OK
-                </Button>
-              </div>
+              <TextInput
+                id="username"
+                type="text"
+                placeholder="Your Name"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                className="w-80 sm:w-64"
+              />
             </div>
-          </Modal.Body>
-        </Modal>
+            <div className="sm:flex space-x-11">
+              <div className="mt-2 block">
+                <Label
+                  htmlFor="password"
+                  value="Password"
+                  className="text-md"
+                />
+              </div>
+              <TextInput
+                id="password"
+                type="password"
+                placeholder="Your Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-80 sm:w-64"
+              />
+            </div>
+            <div className="flex items-center gap-2 mt-4">
+              <Checkbox id="remember" />
+              <Label htmlFor="remember">Remember me</Label>
+            </div>
+            <Button
+              type="submit"
+              gradientDuoTone="purpleToBlue"
+              disabled={loading}
+              className="w-96 ml-8 sm:ml-0"
+            >
+              {loading ? (
+                <>
+                  <Spinner size="sm" />
+                  <span className="pl-3">Loading...</span>
+                </>
+              ) : (
+                "Submit"
+              )}
+            </Button>
+          </form>
+          <div className="flex flex-row justify-center mt-3 mb-10">
+            <h1>Not An Admin...?</h1>
+            <div className="text-blue-400 hover:text-blue-700 ml-1">
+              <Link to="/login">Click here</Link>
+            </div>
+          </div>
+
+          {error && <p className="text-red-500 mt-4">{error}</p>}
+
+          <Modal show={showModal} size="md" popup onClose={handleModalClose}>
+            <Modal.Header />
+            <Modal.Body>
+              <div className="text-center mx-auto space-y-5">
+                <div className="flex justify-center">
+                  <FaCheckCircle color="green" size="50" />
+                </div>
+                <h3 className="mb-5 text-2xl font-semibold">
+                  Login successful!
+                </h3>
+                <div className="justify-center flex">
+                  <Button
+                    gradientDuoTone="tealToLime"
+                    onClick={handleModalClose}
+                    pill
+                  >
+                    OK
+                  </Button>
+                </div>
+              </div>
+            </Modal.Body>
+          </Modal>
+        </div>
       </div>
     </div>
   );
