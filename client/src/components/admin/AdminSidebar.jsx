@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export default function AdminSidebar({ setIsAdmin }) {
+export default function AdminSidebar() {
   const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const navigate = useNavigate();
