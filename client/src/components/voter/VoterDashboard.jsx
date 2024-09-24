@@ -7,6 +7,7 @@ import VoterDropDown from "./VoterDropdown";
 import axios from "axios";
 import { useSelector,useDispatch } from "react-redux";
 import { setVoteCasted } from "../../redux/authSlice";
+import { FaPersonCircleExclamation } from "react-icons/fa6";
 
 export default function VoterDashboard() {
   const [candidates, setCandidates] = useState([]);
@@ -68,57 +69,70 @@ export default function VoterDashboard() {
         <div>
           <VoterDropDown />
         </div>
-        <div>
-          <Table className="w-full min-h-screen dark:text-white">
-            <Table.Head>
-              <Table.HeadCell className="border-r">Name</Table.HeadCell>
-              <Table.HeadCell className="border-r">Party Name</Table.HeadCell>
-              <Table.HeadCell className="hidden sm:block border-r">
-                Party Logo
-              </Table.HeadCell>
-              <Table.HeadCell>
-                <div>Actions</div>
-              </Table.HeadCell>
-            </Table.Head>
-            <Table.Body className="divide-y">
-              {candidates.sort((a, b) => a.name.localeCompare(b.name)).map((candidate) => (
-                <Table.Row key={candidate._id}>
-                  <Table.Cell className="uppercase font-semibold border-r">
-                    {candidate.name}
-                  </Table.Cell>
-                  <Table.Cell className="border-r">
-                    {candidate.partyName}
-                  </Table.Cell>
-                  <Table.Cell className="hidden sm:table-cell border-r">
-                    <div className="ml-3 md:ml-0 880px:ml-3 h-12 w-12 flex justify-center items-center bg-white dark:border-gray-700 rounded-full">
-                      <img
-                        src={candidate.partyLogo}
-                        alt={candidate.partyName}
-                        className="h-12 w-12 rounded-full"
-                      />
-                    </div>
-                  </Table.Cell>
-                  <Table.Cell>
-                    {voteCasted ? (
-                      <span className="text-lg ml-3">voted</span>
-                    ) : (
-                      <Button
-                        color='purple'
-                        size="sm"
-                        onClick={() => {
-                          setShowModal(true);
-                          setCandidateID(candidate._id);
-                        }}
-                      >
-                        Vote
-                      </Button>
-                    )}
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-            </Table.Body>
-          </Table>
-        </div>
+        {candidates.length === 0 ? (
+          <div className="min-h-screen">
+            <div className="flex flex-col gap-4 justify-center items-center h-40 bg-slate-300 dark:bg-slate-800 m-8 rounded-md">
+              <FaPersonCircleExclamation className="text-5xl text-red-600" />
+              <h1 className="text-4xl font-semibold capitalize italic">
+                No Candidates available
+              </h1>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <Table className="w-full min-h-screen dark:text-white">
+              <Table.Head>
+                <Table.HeadCell className="border-r">Name</Table.HeadCell>
+                <Table.HeadCell className="border-r">Party Name</Table.HeadCell>
+                <Table.HeadCell className="hidden sm:block border-r">
+                  Party Logo
+                </Table.HeadCell>
+                <Table.HeadCell>
+                  <div>Actions</div>
+                </Table.HeadCell>
+              </Table.Head>
+              <Table.Body className="divide-y">
+                {candidates
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((candidate) => (
+                    <Table.Row key={candidate._id}>
+                      <Table.Cell className="uppercase font-semibold border-r">
+                        {candidate.name}
+                      </Table.Cell>
+                      <Table.Cell className="border-r">
+                        {candidate.partyName}
+                      </Table.Cell>
+                      <Table.Cell className="hidden sm:table-cell border-r">
+                        <div className="ml-3 md:ml-0 880px:ml-3 h-12 w-12 flex justify-center items-center bg-white dark:border-gray-700 rounded-full">
+                          <img
+                            src={candidate.partyLogo}
+                            alt={candidate.partyName}
+                            className="h-12 w-12 rounded-full"
+                          />
+                        </div>
+                      </Table.Cell>
+                      <Table.Cell>
+                        {voteCasted ? (
+                          <span className="text-lg ml-3">voted</span>
+                        ) : (
+                          <Button
+                            color="purple"
+                            size="sm"
+                            onClick={() => {
+                              setShowModal(true);
+                              setCandidateID(candidate._id);
+                            }}
+                          >
+                            Vote
+                          </Button>
+                        )}
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
+              </Table.Body>
+            </Table>
+          </div>
+        )}
         <Modal
           show={showModal}
           size="md"

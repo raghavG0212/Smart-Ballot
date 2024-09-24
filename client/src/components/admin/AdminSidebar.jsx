@@ -18,7 +18,7 @@ export default function AdminSidebar({ setIsAdmin }) {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/login");
+    navigate("/admin-login");
   };
 
   const toggleSidebar = () => {
@@ -67,7 +67,7 @@ export default function AdminSidebar({ setIsAdmin }) {
             >
               Your Profile
             </Sidebar.Item>
-            <Sidebar.Item onClick={handleLogout} icon={FaArrowRight}>
+            <Sidebar.Item onClick={handleLogout} icon={FaArrowRight} className="cursor-pointer">
               Logout
             </Sidebar.Item>
           </Sidebar.ItemGroup>

@@ -58,7 +58,7 @@ export default function VoterSideBar() {
             >
               Your Profile
             </Sidebar.Item>
-            <Sidebar.Item onClick={handleLogout} icon={FaArrowRight}>
+            <Sidebar.Item onClick={handleLogout} icon={FaArrowRight} className="cursor-pointer">
               Logout
             </Sidebar.Item>
           </Sidebar.ItemGroup>

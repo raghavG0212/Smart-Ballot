@@ -15,7 +15,7 @@ import AdminSidebar from "./AdminSidebar";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase/firebase";
 import axios from "axios";
-import { FaExclamationTriangle } from "react-icons/fa";
+import { FaPersonCircleExclamation } from "react-icons/fa6";
 
 export default function AdminDashBoard() {
   const [candidates, setCandidates] = useState([]);
@@ -177,7 +177,7 @@ export default function AdminDashBoard() {
         <div className="">
           {candidates.length === 0 ? (
             <div className="flex flex-col gap-4 justify-center items-center h-40 bg-slate-300 dark:bg-slate-800 m-8 rounded-md">
-              <FaExclamationTriangle className="text-5xl text-red-600"/>
+              <FaPersonCircleExclamation className="text-5xl text-red-600"/>
               <h1 className="text-4xl font-semibold capitalize italic">No Candidates added</h1>
             </div>
           ) : (

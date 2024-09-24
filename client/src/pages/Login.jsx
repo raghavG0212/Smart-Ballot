@@ -74,7 +74,7 @@ export default function Login() {
         <img
           src="/userlog.jpg"
           alt="sign-in"
-          className="w-5/6 h-5/6 rounded-3xl border-2 border-spacing-4"
+          className="w-5/6 h-5/6 rounded-3xl"
         />
       </div>
       <div className="text-center lg:mr-20 lg:ml-4">
