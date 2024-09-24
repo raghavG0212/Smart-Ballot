@@ -68,16 +68,16 @@ export default function Login() {
   };
   return (
     <div className="flex min-h-screen lg:justify-between justify-center">
-      <div className="hidden bg-blue-100 w-1/2 left-0 lg:flex justify-center items-center">
+      <div className="hidden bg-blue-100 dark:bg-blue-200 w-1/2 left-0 lg:flex justify-center items-center ">
         <img
           src="/userlog.jpg"
           alt="sign-in"
           className="h-2/3 w-5/6 rounded-3xl"
         />
       </div>
-      <div className="text-center sm:mr-16">
+      <div className="text-center lg:mr-20">
         <div className="font-medium text-4xl mb-10 mt-12 capitalize flex flex-col">
-          <span>Welcome to voting system</span>
+          <span>Welcome to Smart Ballot</span>
           <span className="text-blue-600 italic">create your account</span>
         </div>
         <form

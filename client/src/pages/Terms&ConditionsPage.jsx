@@ -10,7 +10,7 @@ export default function TermsAndConditionsPage() {
       <h2 className="text-xl font-semibold mb-2">Introduction</h2>
       <p className="mb-4">
         Welcome to [Your Company Name]. These Terms and Conditions govern your
-        use of our voting system. By using our services, you agree to these
+        use of our Smart Ballot. By using our services, you agree to these
         terms.
       </p>
 

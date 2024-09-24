@@ -61,14 +61,14 @@ export default function AdminLogin({ setIsAdmin }) {
 
   return (
     <div className="flex min-h-screen lg:justify-between justify-center">
-      <div className="hidden bg-blue-100 h-screen w-1/2 left-0 lg:flex justify-center items-center">
+      <div className="hidden bg-blue-100 dark:bg-blue-200 h-screen w-1/2 left-0 lg:flex justify-center items-center">
         <img
           src="/userlog.jpg"
           alt="sign-in"
           className="w-5/6 h-5/6 rounded-3xl"
         />
       </div>
-      <div className="flex items-center justify-center sm:mr-20">
+      <div className="flex items-center justify-center lg:mr-32">
         <div className="text-center">
           <div className="font-medium text-4xl mb-20 mt-12 capitalize flex flex-col">
             <span>Welcome Admin</span>

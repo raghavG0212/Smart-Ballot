@@ -5,7 +5,7 @@ import { FaMoon } from "react-icons/fa";
 import { GoSun } from "react-icons/go";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/themeSlice";
-import {logout} from "../redux/authSlice";
+import { logout } from "../redux/authSlice";
 
 export default function Header() {
   const location = useLocation();
@@ -14,23 +14,23 @@ export default function Header() {
   const isAdmin = useSelector((state) => state.auth.isAdmin);
   const { theme } = useSelector((state) => state.theme);
   const isLoginPage = location.pathname === "/login";
-  const dispatch= useDispatch();
+  const dispatch = useDispatch();
 
-  const handleLogout=()=>{
+  const handleLogout = () => {
     dispatch(logout());
-    navigate('/login');
-  }
+    navigate("/login");
+  };
 
   return (
     <Navbar className="border-b-8 p-4 border-teal-500 dark:border-teal-600 bg-slate-200">
-      <Link to="/" className="sm:text-xl font-semibold dark:text-white">
-        <span className="p-2 bg-gradient-to-r from-orange-500 via-white to-green-700 rounded-lg font-semibold  text-black">
-          <span className="mr-1 md:text-lg lg:text-xl ">Voting System</span>
+      <Link to="/">
+        <span className="p-2 bg-gradient-to-r from-orange-500 to-green-700 rounded-lg font-semibold text-white mr-1 md:text-lg lg:text-xl">
+          Smart Ballot
         </span>
       </Link>
       <div className="font-semibold italic mx-auto hidden md:block text-xl uppercase">
         <Wave
-          text="Cast Your Vote Make A Difference."
+          text="Cast Your Vote Make A Difference." 
           effect="stretch"
           effectChange={2.0}
         />

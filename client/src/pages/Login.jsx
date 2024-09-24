@@ -70,14 +70,14 @@ export default function Login() {
 
   return (
     <div className="flex min-h-screen items-center lg:justify-between justify-center">
-      <div className="hidden bg-blue-100 h-screen w-1/2 left-0 lg:flex justify-center items-center">
+      <div className="hidden bg-blue-100 dark:bg-blue-200 h-screen w-1/2 left-0 lg:flex justify-center items-center">
         <img
           src="/userlog.jpg"
           alt="sign-in"
-          className="w-5/6 h-5/6 rounded-3xl"
+          className="w-5/6 h-5/6 rounded-3xl border-2 border-spacing-4"
         />
       </div>
-      <div className="text-center lg:mr-16 lg:ml-4">
+      <div className="text-center lg:mr-20 lg:ml-4">
         <div className="font-medium text-4xl mb-10 mt-6 capitalize flex flex-col">
           <span>Welcome back</span>
           <span className="text-blue-600 italic">sign in your account</span>

@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 export default function PrivacyPolicyPage() {
   return (
     <div className="p-8 bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
-      <h1 className="text-2xl font-bold mb-4 text-center uppercase">Privacy Policy</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center uppercase">
+        Privacy Policy
+      </h1>
 
       <h2 className="text-xl font-semibold mb-2">Introduction</h2>
       <p className="mb-4">
@@ -37,7 +39,7 @@ export default function PrivacyPolicyPage() {
       <ul className="list-disc list-inside mb-4">
         <li>
           <strong>To Provide Services:</strong> We use your information to
-          operate, maintain, and improve our voting system.
+          operate, maintain, and improve our Smart Ballot.
         </li>
         <li>
           <strong>To Communicate:</strong> We may send you updates,

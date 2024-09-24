@@ -1,11 +1,7 @@
 import { Footer } from "flowbite-react";
 import { Link } from "react-router-dom";
-import {
-  BsFacebook,
-  BsInstagram,
-  BsTwitter,
-  BsGithub,
-} from "react-icons/bs";
+import {BsInstagram, BsTwitterX, BsGithub } from "react-icons/bs";
+import { FaLinkedinIn } from "react-icons/fa";
 export default function FooterCom() {
   return (
     <Footer
@@ -15,14 +11,10 @@ export default function FooterCom() {
       <div className="w-full max-w-7xl mx-auto">
         <div className="grid w-full justify-between sm:flex md:grid-cols-1">
           <div className="mt-5">
-            <Link
-              to="/"
-              className="self-center whitespace-nowrap text-lg sm:text-xl font-semibold dark:text-white"
-            >
-              <span className="p-2 bg-gradient-to-r from-orange-500 via-white to-green-700 rounded-lg font-semibold text-black">
-                <span className="mr-1 text-2xl">Voting System</span>
+            <Link to="/" className="self-center whitespace-nowrap">
+              <span className="p-2 bg-gradient-to-r from-orange-500 to-green-700 rounded-lg font-semibold  text-white mr-1 text-xl lg:text-2xl rotate-90 ">
+                Smart Ballot
               </span>
-              {/* <span>Voting System</span> */}
             </Link>
           </div>
           <div className="grid grid-cols-1 gap-8 mt-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-6">
@@ -41,7 +33,7 @@ export default function FooterCom() {
                   // target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Voting System
+                  Smart Ballot
                 </Footer.Link>
               </Footer.LinkGroup>
             </div>
@@ -78,15 +70,23 @@ export default function FooterCom() {
           <div className="flex space-x-1">
             <Footer.Copyright
               href="#"
-              by="Voting System"
+              by="Smart Ballot"
               year={new Date().getFullYear()}
             />
           </div>
           <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
-            <Footer.Icon href="#" icon={BsFacebook} />
+            <Footer.Icon
+              href="https://www.linkedin.com/in/raghav-goel-rg/"
+              target="_blank"
+              icon={FaLinkedinIn}
+            />
             <Footer.Icon href="#" icon={BsInstagram} />
-            <Footer.Icon href="#" icon={BsTwitter} />
-            <Footer.Icon href="#" icon={BsGithub} />
+            <Footer.Icon href="#" icon={BsTwitterX} />
+            <Footer.Icon
+              href="https://github.com/raghavG0212"
+              target="_blank"
+              icon={BsGithub}
+            />
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ const AboutPage = () => {
 
       <h2 className="text-xl font-semibold mb-2">What We Do</h2>
       <p className="mb-4">
-        We provide a state-of-the-art voting system designed to streamline and
+        We provide a state-of-the-art Smart Ballot designed to streamline and
         enhance the voting experience. Our platform offers a user-friendly
         interface, robust security features, and real-time results to ensure
         that every vote counts and that the process is fair and efficient.

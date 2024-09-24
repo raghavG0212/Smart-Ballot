@@ -99,7 +99,11 @@ export default function HomePage() {
             <Link
               to={isAdmin ? "/admin-candidate-management" : "/voter-dashboard"}
             >
-              <Button gradientDuoTone="purpleToBlue" outline className="w-52 uppercase font-semibold">
+              <Button
+                gradientDuoTone="purpleToBlue"
+                outline
+                className="w-52 uppercase font-semibold"
+              >
                 {!isAdmin ? "Click Here To Vote" : "Go to Dashboard"}
               </Button>
             </Link>
@@ -325,7 +329,7 @@ export default function HomePage() {
         </Card>
         <Card className="shadow-lg text-sm bg-slate-100" horizontal>
           <h2 className="text-2xl font-bold text-center mb-1">
-            Voting System Updates
+            Smart Ballot Updates
           </h2>
           <div className="p-2">
             <div className="mb-2">
