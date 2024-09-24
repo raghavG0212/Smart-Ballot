@@ -15,6 +15,7 @@ import AdminSidebar from "./AdminSidebar";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase/firebase";
 import axios from "axios";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 export default function AdminDashBoard() {
   const [candidates, setCandidates] = useState([]);
@@ -48,9 +49,7 @@ export default function AdminDashBoard() {
     const fetchCandidates = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(
-          "/api/v1/candidate/getCandidates"
-        );
+        const response = await axios.get("/api/v1/candidate/getCandidates");
         setCandidates(response.data);
         setLoading(false);
       } catch (err) {
@@ -73,16 +72,13 @@ export default function AdminDashBoard() {
         const snapshot = await uploadBytes(logoRef, formData.partyLogo);
         partyLogoURL = await getDownloadURL(snapshot.ref);
       }
-      const response = await axios.post(
-        "/api/v1/candidate/create-candidate",
-        {
-          name: formData.name,
-          dob: formData.dob,
-          nationality: formData.nationality,
-          partyName: formData.partyName,
-          partyLogo: partyLogoURL,
-        }
-      );
+      const response = await axios.post("/api/v1/candidate/create-candidate", {
+        name: formData.name,
+        dob: formData.dob,
+        nationality: formData.nationality,
+        partyName: formData.partyName,
+        partyLogo: partyLogoURL,
+      });
       const updatedCandidates = await axios.get(
         "/api/v1/candidate/getCandidates"
       );
@@ -179,84 +175,93 @@ export default function AdminDashBoard() {
       <div className="flex flex-col flex-grow">
         <AdminDropdown />
         <div className="">
-          <Table className="min-h-screen border-b dark:text-white">
-            <Table.Head>
-              <Table.HeadCell className="hidden lg:table-cell border-r">
-                S No.
-              </Table.HeadCell>
-              <Table.HeadCell className="border-r">Name</Table.HeadCell>
-              <Table.HeadCell className="border-r hidden 450px:table-cell">
-                Party Name
-              </Table.HeadCell>
-              <Table.HeadCell className="hidden sm:block border-r">
-                Party Logo
-              </Table.HeadCell>
-              <Table.HeadCell className="border-r">No. Of Votes</Table.HeadCell>
-              <Table.HeadCell>
-                <div className="md:ml-2">Actions</div>
-              </Table.HeadCell>
-            </Table.Head>
-            <Table.Body className="divide-y">
-              {candidates
-                .sort((a, b) => a.name.localeCompare(b.name))
-                .map((candidate, index) => (
-                  <Table.Row key={candidate._id}>
-                    <Table.Cell className="text-lg font-bold hidden lg:table-cell align-middle border-r">
-                      {index + 1}
-                    </Table.Cell>
-                    <Table.Cell className="border-r">
-                      <div className="flex flex-col">
-                        <span className="uppercase font-semibold ">
-                          {candidate.name}
-                        </span>
-                        <span className="450px:hidden">
-                          ({candidate.partyName})
-                        </span>
-                      </div>
-                    </Table.Cell>
-                    <Table.Cell className="border-r hidden 450px:table-cell">
-                      {candidate.partyName}
-                    </Table.Cell>
-                    <Table.Cell className="hidden sm:table-cell border-r">
-                      <div className="ml-3 md:ml-0 880px:ml-3 h-12 w-12 flex justify-center items-center bg-white dark:border-gray-700 rounded-full">
-                        <img
-                          src={candidate.partyLogo}
-                          alt={candidate.partyName}
-                          className="h-12 w-12 rounded-full"
-                        />
-                      </div>
-                    </Table.Cell>
-                    <Table.Cell className="border-r">
-                      {candidate.votes}
-                    </Table.Cell>
-                    <Table.Cell>
-                      <div className="flex flex-col md:flex-row md:space-x-2 space-y-1 md:space-y-0">
-                        <Button
-                          color="success"
-                          size="sm"
-                          onClick={() => {
-                            setOpenEditModal(true);
-                            setCandidateToEdit(candidate._id);
-                          }}
-                        >
-                          <HiOutlinePencil />
-                        </Button>
-                        <Button
-                          color="failure"
-                          size="sm"
-                          onClick={() => {
-                            setOpenDeleteModal(true);
-                            setCandidateToDelete(candidate._id);
-                          }}
-                        >
-                          <MdDelete />
-                        </Button>
-                      </div>
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
-            </Table.Body>
-          </Table>
+          {candidates.length === 0 ? (
+            <div className="flex flex-col gap-4 justify-center items-center h-40 bg-slate-300 dark:bg-slate-800 m-8 rounded-md">
+              <FaExclamationTriangle className="text-5xl text-red-600"/>
+              <h1 className="text-4xl font-semibold capitalize italic">No Candidates added</h1>
+            </div>
+          ) : (
+            <Table className="min-h-screen border-b dark:text-white">
+              <Table.Head>
+                <Table.HeadCell className="hidden lg:table-cell border-r">
+                  S No.
+                </Table.HeadCell>
+                <Table.HeadCell className="border-r">Name</Table.HeadCell>
+                <Table.HeadCell className="border-r hidden 450px:table-cell">
+                  Party Name
+                </Table.HeadCell>
+                <Table.HeadCell className="hidden sm:block border-r">
+                  Party Logo
+                </Table.HeadCell>
+                <Table.HeadCell className="border-r">
+                  No. Of Votes
+                </Table.HeadCell>
+                <Table.HeadCell>
+                  <div className="md:ml-2">Actions</div>
+                </Table.HeadCell>
+              </Table.Head>
+              <Table.Body className="divide-y">
+                {candidates
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((candidate, index) => (
+                    <Table.Row key={candidate._id}>
+                      <Table.Cell className="text-lg font-bold hidden lg:table-cell align-middle border-r">
+                        {index + 1}
+                      </Table.Cell>
+                      <Table.Cell className="border-r">
+                        <div className="flex flex-col">
+                          <span className="uppercase font-semibold ">
+                            {candidate.name}
+                          </span>
+                          <span className="450px:hidden">
+                            ({candidate.partyName})
+                          </span>
+                        </div>
+                      </Table.Cell>
+                      <Table.Cell className="border-r hidden 450px:table-cell">
+                        {candidate.partyName}
+                      </Table.Cell>
+                      <Table.Cell className="hidden sm:table-cell border-r">
+                        <div className="ml-3 md:ml-0 880px:ml-3 h-12 w-12 flex justify-center items-center bg-white dark:border-gray-700 rounded-full">
+                          <img
+                            src={candidate.partyLogo}
+                            alt={candidate.partyName}
+                            className="h-12 w-12 rounded-full"
+                          />
+                        </div>
+                      </Table.Cell>
+                      <Table.Cell className="border-r">
+                        {candidate.votes}
+                      </Table.Cell>
+                      <Table.Cell>
+                        <div className="flex flex-col md:flex-row md:space-x-2 space-y-1 md:space-y-0">
+                          <Button
+                            color="success"
+                            size="sm"
+                            onClick={() => {
+                              setOpenEditModal(true);
+                              setCandidateToEdit(candidate._id);
+                            }}
+                          >
+                            <HiOutlinePencil />
+                          </Button>
+                          <Button
+                            color="failure"
+                            size="sm"
+                            onClick={() => {
+                              setOpenDeleteModal(true);
+                              setCandidateToDelete(candidate._id);
+                            }}
+                          >
+                            <MdDelete />
+                          </Button>
+                        </div>
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
+              </Table.Body>
+            </Table>
+          )}
 
           {/* create button */}
           <div className="flex justify-center mt-20 mb-32">

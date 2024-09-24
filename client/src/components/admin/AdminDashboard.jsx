@@ -196,8 +196,8 @@ export default function AdminMainDash() {
             <h5 className="text-3xl font-semibold mb-4 text-center capitalize italic">
               Votes Wagon Wheel
             </h5>
-            {loading && <p>Loading...</p>}
-            {error && <p className="text-red-500">{error}</p>}
+            {loading && <p className="text-center text-xl">Loading...</p>}
+            {error && <p className="text-red-500 text-center text-xl">{error}</p>}
             {!loading && !error && <Pie data={data} />}
           </Card>
         </div>
