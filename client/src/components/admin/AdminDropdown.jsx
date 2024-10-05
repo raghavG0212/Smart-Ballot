@@ -5,6 +5,7 @@ import { HiChartPie } from "react-icons/hi";
 import { logout } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
 import { FaPeopleRoof, FaPerson, FaArrowRight } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 export default function AdminDropdown() {
   const location = useLocation();
@@ -13,7 +14,8 @@ export default function AdminDropdown() {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/login");
+    toast.success("Logged out successfully.");
+    navigate("/admin-login");
   };
 
   return (

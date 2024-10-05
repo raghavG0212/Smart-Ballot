@@ -16,6 +16,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase/firebase";
 import axios from "axios";
 import { FaPersonCircleExclamation } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 export default function AdminDashBoard() {
   const [candidates, setCandidates] = useState([]);
@@ -23,7 +24,6 @@ export default function AdminDashBoard() {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [candidateToEdit, setCandidateToEdit] = useState(null);
   const [candidateToDelete, setCandidateToDelete] = useState(null);
   const [name, setName] = useState("");
@@ -53,7 +53,7 @@ export default function AdminDashBoard() {
         setCandidates(response.data);
         setLoading(false);
       } catch (err) {
-        setError("Failed to load candidates");
+        toast.error("Failed to load candidates");
       } finally {
         setLoading(false);
       }
@@ -64,7 +64,6 @@ export default function AdminDashBoard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
     try {
       let partyLogoURL = "";
       if (formData.partyLogo) {
@@ -83,13 +82,11 @@ export default function AdminDashBoard() {
         "/api/v1/candidate/getCandidates"
       );
       setCandidates(updatedCandidates.data);
-      setLoading(false);
       setOpenCreateModal(false);
-      setTimeout(() => {
-        alert(response.data.message);
-      }, 300);
+      toast.success(response.data.message);
     } catch (err) {
-      setError(err.response?.data?.message || "Error adding candidate");
+      toast.error(err.response?.data?.message || "Error adding candidate");
+    } finally {
       setLoading(false);
     }
   };
@@ -97,7 +94,6 @@ export default function AdminDashBoard() {
   const handleEditCandidate = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
     try {
       let partyLogoURL = "";
       if (partyLogo) {
@@ -121,21 +117,17 @@ export default function AdminDashBoard() {
       );
       const data = await response.json();
       if (response.ok) {
-        setLoading(false);
         const updatedCandidates = await axios.get(
           "/api/v1/candidate/getCandidates"
         );
         setCandidates(updatedCandidates.data);
         setOpenEditModal(false);
-        setTimeout(() => {
-          alert(data.message);
-        }, 300);
+        toast.success(data.message);
       } else {
-        alert(data.message || "Failed to update candidate details");
+        toast.error(data.message || "Failed to update candidate details");
       }
     } catch (err) {
-      console.error("Error updating candidate:", err);
-      setError("Failed to update candidate.");
+      toast.error("Failed to update candidate.");
     } finally {
       setLoading(false);
     }
@@ -143,28 +135,25 @@ export default function AdminDashBoard() {
 
   const handleDeleteCandidate = async () => {
     setLoading(true);
-    setError(null);
     try {
       const response = await axios.delete(
         `/api/v1/candidate/delete-candidate/${candidateToDelete}`
       );
-      setOpenDeleteModal(false);
       const updatedCandidates = await axios.get(
         "/api/v1/candidate/getCandidates"
       );
       setCandidates(updatedCandidates.data);
-      setTimeout(() => {
-        alert(response.data.message);
-      }, 300);
-      setLoading(false);
+      setOpenDeleteModal(false);
+      toast.success(response.data.message);
     } catch (err) {
       if (err.response?.status === 400) {
-        alert("Cannot delete candidate with 50% or more of total votes.");
+        toast.error("Cannot delete candidate with 50% or more of total votes.");
       } else if (err.response?.status === 404) {
-        alert("Candidate not found.");
+        toast.error("Candidate not found.");
       } else {
-        setError(err.response?.data?.message || "Error deleting candidate");
+        toast.error(err.response?.data?.message || "Error deleting candidate");
       }
+    } finally {
       setLoading(false);
     }
   };
@@ -177,102 +166,105 @@ export default function AdminDashBoard() {
         <div className="">
           {candidates.length === 0 ? (
             <div className="flex flex-col gap-4 justify-center items-center h-40 bg-slate-300 dark:bg-slate-800 m-8 rounded-md">
-              <FaPersonCircleExclamation className="text-5xl text-red-600"/>
-              <h1 className="text-4xl font-semibold capitalize italic">No Candidates added</h1>
+              <FaPersonCircleExclamation className="text-5xl text-red-600" />
+              <h1 className="text-4xl font-semibold capitalize italic">
+                No Candidates added
+              </h1>
             </div>
           ) : (
-            <Table className="min-h-screen border-b dark:text-white">
-              <Table.Head>
-                <Table.HeadCell className="hidden lg:table-cell border-r">
-                  S No.
-                </Table.HeadCell>
-                <Table.HeadCell className="border-r">Name</Table.HeadCell>
-                <Table.HeadCell className="border-r hidden 450px:table-cell">
-                  Party Name
-                </Table.HeadCell>
-                <Table.HeadCell className="hidden sm:block border-r">
-                  Party Logo
-                </Table.HeadCell>
-                <Table.HeadCell className="border-r">
-                  No. Of Votes
-                </Table.HeadCell>
-                <Table.HeadCell>
-                  <div className="md:ml-2">Actions</div>
-                </Table.HeadCell>
-              </Table.Head>
-              <Table.Body className="divide-y">
-                {candidates
-                  .sort((a, b) => a.name.localeCompare(b.name))
-                  .map((candidate, index) => (
-                    <Table.Row key={candidate._id}>
-                      <Table.Cell className="text-lg font-bold hidden lg:table-cell align-middle border-r">
-                        {index + 1}
-                      </Table.Cell>
-                      <Table.Cell className="border-r">
-                        <div className="flex flex-col">
-                          <span className="uppercase font-semibold ">
-                            {candidate.name}
-                          </span>
-                          <span className="450px:hidden">
-                            ({candidate.partyName})
-                          </span>
-                        </div>
-                      </Table.Cell>
-                      <Table.Cell className="border-r hidden 450px:table-cell">
-                        {candidate.partyName}
-                      </Table.Cell>
-                      <Table.Cell className="hidden sm:table-cell border-r">
-                        <div className="ml-3 md:ml-0 880px:ml-3 h-12 w-12 flex justify-center items-center bg-white dark:border-gray-700 rounded-full">
-                          <img
-                            src={candidate.partyLogo}
-                            alt={candidate.partyName}
-                            className="h-12 w-12 rounded-full"
-                          />
-                        </div>
-                      </Table.Cell>
-                      <Table.Cell className="border-r">
-                        {candidate.votes}
-                      </Table.Cell>
-                      <Table.Cell>
-                        <div className="flex flex-col md:flex-row md:space-x-2 space-y-1 md:space-y-0">
-                          <Button
-                            color="success"
-                            size="sm"
-                            onClick={() => {
-                              setOpenEditModal(true);
-                              setCandidateToEdit(candidate._id);
-                            }}
-                          >
-                            <HiOutlinePencil />
-                          </Button>
-                          <Button
-                            color="failure"
-                            size="sm"
-                            onClick={() => {
-                              setOpenDeleteModal(true);
-                              setCandidateToDelete(candidate._id);
-                            }}
-                          >
-                            <MdDelete />
-                          </Button>
-                        </div>
-                      </Table.Cell>
-                    </Table.Row>
-                  ))}
-              </Table.Body>
-            </Table>
+            <div className="min-h-screen">
+              <Table className="border-b dark:text-white">
+                <Table.Head>
+                  <Table.HeadCell className="hidden lg:table-cell border-r">
+                    S No.
+                  </Table.HeadCell>
+                  <Table.HeadCell className="border-r">Name</Table.HeadCell>
+                  <Table.HeadCell className="border-r hidden 450px:table-cell">
+                    Party Name
+                  </Table.HeadCell>
+                  <Table.HeadCell className="hidden sm:block border-r">
+                    Party Logo
+                  </Table.HeadCell>
+                  <Table.HeadCell className="border-r">
+                    No. Of Votes
+                  </Table.HeadCell>
+                  <Table.HeadCell>
+                    <div className="md:ml-2">Actions</div>
+                  </Table.HeadCell>
+                </Table.Head>
+                <Table.Body className="divide-y">
+                  {candidates
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map((candidate, index) => (
+                      <Table.Row key={candidate._id}>
+                        <Table.Cell className="text-lg font-bold hidden lg:table-cell align-middle border-r">
+                          {index + 1}
+                        </Table.Cell>
+                        <Table.Cell className="border-r">
+                          <div className="flex flex-col">
+                            <span className="uppercase font-semibold ">
+                              {candidate.name}
+                            </span>
+                            <span className="450px:hidden">
+                              ({candidate.partyName})
+                            </span>
+                          </div>
+                        </Table.Cell>
+                        <Table.Cell className="border-r hidden 450px:table-cell">
+                          {candidate.partyName}
+                        </Table.Cell>
+                        <Table.Cell className="hidden sm:table-cell border-r">
+                          <div className="ml-3 md:ml-0 880px:ml-3 h-12 w-12 flex justify-center items-center bg-white dark:border-gray-700 rounded-full">
+                            <img
+                              src={candidate.partyLogo}
+                              alt={candidate.partyName}
+                              className="h-12 w-12 rounded-full"
+                              loading="lazy"
+                            />
+                          </div>
+                        </Table.Cell>
+                        <Table.Cell className="border-r">
+                          {candidate.votes}
+                        </Table.Cell>
+                        <Table.Cell>
+                          <div className="flex flex-col md:flex-row md:space-x-2 space-y-1 md:space-y-0">
+                            <Button
+                              color="success"
+                              size="sm"
+                              onClick={() => {
+                                setOpenEditModal(true);
+                                setCandidateToEdit(candidate._id);
+                              }}
+                            >
+                              <HiOutlinePencil />
+                            </Button>
+                            <Button
+                              color="failure"
+                              size="sm"
+                              onClick={() => {
+                                setOpenDeleteModal(true);
+                                setCandidateToDelete(candidate._id);
+                              }}
+                            >
+                              <MdDelete />
+                            </Button>
+                          </div>
+                        </Table.Cell>
+                      </Table.Row>
+                    ))}
+                </Table.Body>
+              </Table>
+              <div className="flex justify-center mt-20 mb-32">
+                <Button
+                  gradientDuoTone="redToYellow"
+                  outline
+                  onClick={() => setOpenCreateModal(true)}
+                >
+                  Add New Candidate
+                </Button>
+              </div>
+            </div>
           )}
-
-          {/* create button */}
-          <div className="flex justify-center mt-20 mb-32">
-            <Button
-              gradientDuoTone="redToYellow"
-              outline
-              onClick={() => setOpenCreateModal(true)}
-            >
-              Add New Candidate
-            </Button>
-          </div>
         </div>
       </div>
 
@@ -381,7 +373,6 @@ export default function AdminDashBoard() {
                 required
               />
             </div>
-            {error && <div className="text-red-500">{error}</div>}
             <div className="mt-10 flex justify-center">
               <Button
                 gradientDuoTone="purpleToPink"

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { toast } from "react-toastify";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -18,7 +19,6 @@ export default function AdminMainDash() {
  const currentUser = useSelector((state) => state.auth.currentUser);
  const [admins, setAdmins] = useState([]);
  const [loading, setLoading] = useState(false);
- const [error, setError] = useState(null);
  const [openDeleteModal, setOpenDeleteModal] = useState(false);
  const [adminToDelete, setAdminToDelete] = useState(null);
  const candidateNames = candidates.map((candidate) => candidate.name);
@@ -32,9 +32,8 @@ export default function AdminMainDash() {
           "/api/v1/admin/getAdmins"
         );
         setAdmins(response.data);
-        setLoading(false);
       } catch (err) {
-        setError("Failed to load admins");
+        toast.error("Failed to load admins");
       } finally {
         setLoading(false);
       }
@@ -60,10 +59,8 @@ export default function AdminMainDash() {
           0
         );
         setTotalVotes(totalVotesCount);
-
-        setLoading(false);
       } catch (err) {
-        setError("Failed to load candidates");
+        toast.error("Failed to load candidates");
       } finally {
         setLoading(false);
       }
@@ -101,7 +98,6 @@ export default function AdminMainDash() {
   };
   const handleAdminDelete = async () => {
     setLoading(true);
-    setError(null);
     try {
       const response = await axios.delete(
         `/api/v1/admin/delete-admin/${adminToDelete}`
@@ -111,18 +107,17 @@ export default function AdminMainDash() {
         "/api/v1/admin/getAdmins"
       );
       setAdmins(updatedAdmins.data);
-      setTimeout(() => {
-        alert(response.data.message);
-      }, 300);
-      setLoading(false);
+      toast.success(response.data.message);
     } catch (err) {
       if (err.response?.status === 400) {
-        alert("Cannot delete Admin");
+        toast.error("Cannot delete Admin")
       } else if (err.response?.status === 404) {
-        alert("Admin not found.");
+        toast.error("Admin not found.");
       } else {
-        setError(err.response?.data?.message || "Error deleting admin");
+        toast.error(err.response?.data?.message || "Error deleting admin");
       }
+    }
+    finally{
       setLoading(false);
     }
   };
@@ -159,8 +154,6 @@ export default function AdminMainDash() {
             <h1 className="text-3xl font-semibold text-center mb-8 capitalize italic">
               Manage Admins
             </h1>
-            {loading ? "loading..." : ""}
-            {error}
             <Table className="border border-black bg-slate-100 ">
               <Table.Head>
                 <Table.HeadCell className="border-r">Name</Table.HeadCell>
@@ -196,9 +189,7 @@ export default function AdminMainDash() {
             <h5 className="text-3xl font-semibold mb-4 text-center capitalize italic">
               Votes Wagon Wheel
             </h5>
-            {loading && <p className="text-center text-xl">Loading...</p>}
-            {error && <p className="text-red-500 text-center text-xl">{error}</p>}
-            {!loading && !error && <Pie data={data} />}
+            {!loading && <Pie data={data} />}
           </Card>
         </div>
       </div>

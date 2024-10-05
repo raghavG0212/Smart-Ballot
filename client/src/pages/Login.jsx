@@ -12,6 +12,7 @@ import {
 } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -53,11 +54,10 @@ export default function Login() {
         setShowModal(true);
       } else {
         const errorData = await response.json();
-        alert(errorData.message);
+        toast.error(errorData.message);
       }
     } catch (error) {
-      console.error("Error during login:", error);
-      alert("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }

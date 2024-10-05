@@ -17,6 +17,8 @@ import AdminDashboard from "./components/admin/AdminDashboard";
 import AdminProfile from "./components/admin/AdminProfile";
 import OnlyVoter from "./components/PrivateRoutes/OnlyVoter";
 import OnlyAdmin from "./components/PrivateRoutes/OnlyAdmin";
+import {Flip, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   return (
@@ -49,6 +51,19 @@ export default function App() {
         />
       </Routes>
       <Footer />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+        theme="dark"
+        transition={Flip}
+      />
     </div>
   );
 }

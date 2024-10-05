@@ -6,6 +6,7 @@ import { GoSun } from "react-icons/go";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/themeSlice";
 import { logout } from "../redux/authSlice";
+import { toast } from "react-toastify";
 
 export default function Header() {
   const location = useLocation();
@@ -18,13 +19,14 @@ export default function Header() {
 
   const handleLogout = () => {
     dispatch(logout());
+    toast.success("Logged out successfully.");
     navigate("/login");
   };
 
   return (
     <Navbar className="border-b-8 p-4 border-teal-500 dark:border-teal-600 bg-slate-200">
       <Link to="/">
-        <span className="p-2 bg-gradient-to-r from-orange-500 to-green-700 rounded-lg font-semibold text-white mr-1 md:text-lg lg:text-xl">
+        <span className="p-2 bg-gradient-to-r from-orange-500 to-green-700 rounded-lg font-semibold text-white mr-1 md:text-lg lg:text-xl shadow-lg">
           Smart Ballot
         </span>
       </Link>
@@ -39,8 +41,8 @@ export default function Header() {
         to="/about"
         className={({ isActive }) =>
           `${
-            isActive ? "text-blue-700 text-lg" : ""
-          } text-lg mr-5 hidden lg:block hover:underline`
+            isActive && "text-blue-700 text-lg" 
+          } text-lg mr-5 hidden lg:block hover:text-blue-600 hover:scale-110 transition duration-200 ease-in-out`
         }
       >
         About

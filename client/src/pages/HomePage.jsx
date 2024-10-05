@@ -133,7 +133,7 @@ export default function HomePage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-4 ">
-        <Card className="shadow-lg bg-slate-100">
+        <Card className="shadow-lg bg-slate-100 hover:scale-105 transition duration-200 ease-in-out">
           <h2 className="text-2xl font-bold text-center mb-2 capitalize">
             assembly elections
           </h2>
@@ -181,7 +181,7 @@ export default function HomePage() {
           </div>
         </Card>
 
-        <Card className="shadow-lg bg-slate-100">
+        <Card className="shadow-lg bg-slate-100 hover:scale-105 transition duration-200 ease-in-out">
           <h2 className="text-2xl font-bold text-center mb-2">
             Municipal Elections
           </h2>
@@ -214,7 +214,7 @@ export default function HomePage() {
           </div>
         </Card>
 
-        <Card className="shadow-lg bg-slate-100">
+        <Card className="shadow-lg bg-slate-100 hover:scale-105 transition duration-200 ease-in-out">
           <h2 className="text-2xl font-bold text-center mb-2">
             General Elections
           </h2>
@@ -251,7 +251,10 @@ export default function HomePage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-4 mb-10">
-        <Card className="shadow-lg bg-slate-100 capitalize" horizontal>
+        <Card
+          className="shadow-lg bg-slate-100 capitalize hover:scale-105 transition duration-200 ease-in-out"
+          horizontal
+        >
           <h2 className="text-2xl font-bold text-center mb-10">
             Eligibility for Candidates
           </h2>
@@ -290,7 +293,10 @@ export default function HomePage() {
             </div>
           </div>
         </Card>
-        <Card className="shadow-lg bg-slate-100 capitalize" horizontal>
+        <Card
+          className="shadow-lg bg-slate-100 capitalize hover:scale-105 transition duration-200 ease-in-out "
+          horizontal
+        >
           <h2 className="text-2xl font-bold text-center mb-10">
             Eligibility for Voters
           </h2>
@@ -327,7 +333,10 @@ export default function HomePage() {
             </div>
           </div>
         </Card>
-        <Card className="shadow-lg text-sm bg-slate-100" horizontal>
+        <Card
+          className="shadow-lg text-sm bg-slate-100 hover:scale-105 transition duration-200 ease-in-out"
+          horizontal
+        >
           <h2 className="text-2xl font-bold text-center mb-1">
             Smart Ballot Updates
           </h2>

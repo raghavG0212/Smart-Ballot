@@ -5,6 +5,7 @@ import { useSelector,useDispatch } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 import { setCurrentUser } from "../../redux/authSlice";
+import { toast } from "react-toastify";
 
 export default function AdminProfile() {
   const currentUser = useSelector((state) => state.auth.currentUser);
@@ -33,19 +34,13 @@ export default function AdminProfile() {
 
       if (response.ok) {
         dispatch(setCurrentUser(data.admin));
-        setLoading(false);
         setOpenEditModal(false);
-        setTimeout(()=>{
-          alert(data.message);
-        },300);  
+        toast.success(data.message);
       } else {
-        setLoading(false);
-        setTimeout(() => {
-          alert(data.message);
-        }, 300);
+        toast.error(data.message);
       }
     } catch (error) {
-      alert("An error occurred while updating admin details");
+      toast.error("An error occurred while updating admin details");
     } finally {
       setLoading(false);
     }

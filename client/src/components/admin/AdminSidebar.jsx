@@ -9,6 +9,7 @@ import { logout } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function AdminSidebar() {
   const location = useLocation();
@@ -18,6 +19,7 @@ export default function AdminSidebar() {
 
   const handleLogout = () => {
     dispatch(logout());
+    toast.success("Logged out successfully.");
     navigate("/admin-login");
   };
 

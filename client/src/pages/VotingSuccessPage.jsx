@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/authSlice";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function VotingSuccessPage() {
   const [voter, setVoter] = useState({
@@ -22,7 +23,6 @@ export default function VotingSuccessPage() {
   useEffect(() => {
     const handleFetchVoter = async () => {
       setLoading(true);
-      setError(null);
       try {
         const response = await axios.get(
           "/api/v1/voter/get-voter",
@@ -32,7 +32,7 @@ export default function VotingSuccessPage() {
         );
         setVoter(response.data);
       } catch (err) {
-        setError(
+        toast.error(
           err.response?.data?.message || "Failed to fetch voter details"
         );
       } finally {
@@ -44,16 +44,15 @@ export default function VotingSuccessPage() {
 
   const handleLogout = () => {
     dispatch(logout());
+    toast.success("Logged out successfully.");
     navigate("/login");
   };
 
   return (
-    <div className="flex flex-row justify-evenly items-center min-h-screen">
+    <div className="flex flex-col sm:flex-row justify-evenly items-center min-h-screen">
       <div className="flex flex-col items-center">
-        <h1 className="text-4xl mb-5">You Successfully Voted</h1>
-        {loading && <p>Loading...</p>}
-        {error && <p className="text-red-500">{error}</p>}
-        {!loading && !error && voter && (
+        <h1 className="text-4xl mb-5 mt-16 sm:mt-0">You Successfully Voted</h1>
+        {!loading && voter && (
           <Table className="mb-16 border-2 divide-y">
             <Table.Head>
               <Table.HeadCell className="border-r">Name</Table.HeadCell>
@@ -82,7 +81,7 @@ export default function VotingSuccessPage() {
             </Table.Body>
           </Table>
         )}
-        <Button color="success" outline size="xl" onClick={handleLogout}>
+        <Button color="success" outline size="xl" onClick={handleLogout} className="mb-6 sm:mb-0">
           Logout
         </Button>
       </div>

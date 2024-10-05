@@ -1,4 +1,4 @@
-import { Button, Modal, Table } from "flowbite-react";
+import { Button, Modal, Spinner, Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
@@ -8,6 +8,7 @@ import axios from "axios";
 import { useSelector,useDispatch } from "react-redux";
 import { setVoteCasted } from "../../redux/authSlice";
 import { FaPersonCircleExclamation } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 export default function VoterDashboard() {
   const [candidates, setCandidates] = useState([]);
@@ -15,7 +16,6 @@ export default function VoterDashboard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const voteCasted = useSelector((state) => state.auth.voteCasted);
   const [candidateID, setCandidateID] = useState(null);
@@ -29,7 +29,7 @@ export default function VoterDashboard() {
         );
         setCandidates(response.data);
       } catch (err) {
-        setError("Failed to load candidates");
+        toast.error("Failed to load candidates");
       } finally {
         setLoading(false);
       }
@@ -52,16 +52,16 @@ export default function VoterDashboard() {
         setShowModal(false);
         navigate("/voting-success");
       } else {
-        alert(response.data.message || "An error occured");
+        toast.error(response.data.message || "Voting cannot be processed.");
       }
-    } catch (err) {
-      alert(error.response?.data?.message || "An error occurred");
-      setLoading(false);
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Voting cannot be processed."
+      );
     } finally {
       setLoading(false);
     }
   };
-
   return (
     <div className="flex flex-row">
       <VoterSideBar className="h-full" />
@@ -108,6 +108,7 @@ export default function VoterDashboard() {
                             src={candidate.partyLogo}
                             alt={candidate.partyName}
                             className="h-12 w-12 rounded-full"
+                            loading="lazy"
                           />
                         </div>
                       </Table.Cell>
@@ -149,7 +150,7 @@ export default function VoterDashboard() {
               </h3>
               <div className="flex justify-center gap-8">
                 <Button color="success" onClick={handleVoteExecution}>
-                  Yes, I'm sure
+                  {loading ? (<div className="flex items-center space-x-1"><Spinner/><span>Loading...</span></div>):("Yes, I'm sure")}
                 </Button>
                 <Button color="failure" onClick={() => setShowModal(false)}>
                   No, cancel

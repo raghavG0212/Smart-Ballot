@@ -11,6 +11,7 @@ import {
 } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -52,11 +53,10 @@ export default function Login() {
         setVIDShow(responseData.voterID);
       } else {
         const errorData = await response.json();
-        alert(errorData.message);
+        toast.error(errorData.message);
       }
     } catch (error) {
-      console.error("Error during signup:", error);
-      alert("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }

@@ -3,6 +3,7 @@ import { Link, useLocation,useNavigate } from "react-router-dom";
 import { logout } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
 import { FaPeopleRoof, FaPerson, FaArrowRight } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 export default function VoterDropDown() {
   const location = useLocation();
@@ -11,6 +12,7 @@ export default function VoterDropDown() {
 
   const handleLogout = () => {
     dispatch(logout());
+    toast.success("Logged out successfully.");
     navigate("/login");
   };
 

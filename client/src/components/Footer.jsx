@@ -12,7 +12,7 @@ export default function FooterCom() {
         <div className="grid w-full justify-between sm:flex md:grid-cols-1">
           <div className="mt-5">
             <Link to="/" className="self-center whitespace-nowrap">
-              <span className="p-2 bg-gradient-to-r from-orange-500 to-green-700 rounded-lg font-semibold  text-white mr-1 text-xl lg:text-2xl rotate-90 ">
+              <span className="p-2 bg-gradient-to-r from-orange-500 to-green-700 rounded-lg font-semibold  text-white mr-1 text-xl lg:text-2xl rotate-90 shadow-lg">
                 Smart Ballot
               </span>
             </Link>

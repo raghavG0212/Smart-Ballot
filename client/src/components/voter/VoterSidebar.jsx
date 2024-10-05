@@ -8,6 +8,7 @@ import { useLocation, Link, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function VoterSideBar() {
   const location = useLocation();
@@ -17,6 +18,7 @@ export default function VoterSideBar() {
 
   const handleLogout = () => {
     dispatch(logout());
+    toast.success("Logged out successfully.");
     navigate("/login");
   };
 

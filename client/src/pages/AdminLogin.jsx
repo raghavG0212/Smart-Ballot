@@ -11,21 +11,19 @@ import {
 } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 export default function AdminLogin() {
   const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
-
     try {
       const response = await fetch(
         "/api/v1/admin/admin-login",
@@ -37,18 +35,16 @@ export default function AdminLogin() {
           body: JSON.stringify({ name: username, password }),
         }
       );
-
       const data = await response.json();
-
       if (response.ok) {
         dispatch(setAdmin(true));
         dispatch(setCurrentUser(data.user));
         setShowModal(true);
       } else {
-        setError(data.message || "Login failed");
+        toast.error(data.message || "Login failed");
       }
     } catch (err) {
-      setError("An error occurred");
+      toast.error("Error occured")
     } finally {
       setLoading(false);
     }
@@ -140,8 +136,6 @@ export default function AdminLogin() {
               <Link to="/login">Click here</Link>
             </div>
           </div>
-
-          {error && <p className="text-red-500 mt-4">{error}</p>}
 
           <Modal show={showModal} size="md" popup onClose={handleModalClose}>
             <Modal.Header />
