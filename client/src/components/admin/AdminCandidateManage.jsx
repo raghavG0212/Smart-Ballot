@@ -17,6 +17,7 @@ import { storage } from "../../firebase/firebase";
 import axios from "axios";
 import { FaPersonCircleExclamation } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import Loader from "../Loader";
 
 export default function AdminDashBoard() {
   const [candidates, setCandidates] = useState([]);
@@ -24,6 +25,7 @@ export default function AdminDashBoard() {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
   const [candidateToEdit, setCandidateToEdit] = useState(null);
   const [candidateToDelete, setCandidateToDelete] = useState(null);
   const [name, setName] = useState("");
@@ -48,14 +50,14 @@ export default function AdminDashBoard() {
   useEffect(() => {
     const fetchCandidates = async () => {
       try {
-        setLoading(true);
         const response = await axios.get("/api/v1/candidate/getCandidates");
         setCandidates(response.data);
-        setLoading(false);
       } catch (err) {
         toast.error("Failed to load candidates");
       } finally {
-        setLoading(false);
+        setTimeout(() => {
+          setInitialLoading(false);
+        }, 500);
       }
     };
     fetchCandidates();
@@ -158,6 +160,13 @@ export default function AdminDashBoard() {
     }
   };
 
+  if (initialLoading) {
+    return (
+      <div className="h-screen">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <div className="flex flex-row">
       <AdminSidebar className="h-full" />
@@ -165,7 +174,7 @@ export default function AdminDashBoard() {
         <AdminDropdown />
         <div className="">
           {candidates.length === 0 ? (
-            <div className="flex flex-col gap-4 justify-center items-center h-40 bg-slate-300 dark:bg-slate-800 m-8 rounded-md">
+            <div className="flex flex-col gap-4 justify-center items-center h-40 bg-slate-300 dark:bg-slate-800 m-8 rounded-md ">
               <FaPersonCircleExclamation className="text-5xl text-red-600" />
               <h1 className="text-4xl font-semibold capitalize italic">
                 No Candidates added
@@ -254,17 +263,18 @@ export default function AdminDashBoard() {
                     ))}
                 </Table.Body>
               </Table>
-              <div className="flex justify-center mt-20 mb-32">
-                <Button
-                  gradientDuoTone="redToYellow"
-                  outline
-                  onClick={() => setOpenCreateModal(true)}
-                >
-                  Add New Candidate
-                </Button>
-              </div>
             </div>
           )}
+          <div className="flex justify-center mt-20 mb-32">
+            <Button
+              gradientDuoTone="redToYellow"
+              outline
+              onClick={() => setOpenCreateModal(true)}
+            >
+              Add New Candidate
+            </Button>
+          </div>
+          <div className={`${candidates.length==0 && "h-72"}`}></div>
         </div>
       </div>
 

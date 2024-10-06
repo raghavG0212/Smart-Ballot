@@ -9,6 +9,7 @@ import { useSelector,useDispatch } from "react-redux";
 import { setVoteCasted } from "../../redux/authSlice";
 import { FaPersonCircleExclamation } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import Loader from "../Loader";
 
 export default function VoterDashboard() {
   const [candidates, setCandidates] = useState([]);
@@ -31,7 +32,9 @@ export default function VoterDashboard() {
       } catch (err) {
         toast.error("Failed to load candidates");
       } finally {
-        setLoading(false);
+        setTimeout(()=>{
+          setLoading(false);
+        },500);
       }
     };
     fetchCandidates();
@@ -62,6 +65,14 @@ export default function VoterDashboard() {
       setLoading(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="h-screen">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <div className="flex flex-row">
       <VoterSideBar className="h-full" />

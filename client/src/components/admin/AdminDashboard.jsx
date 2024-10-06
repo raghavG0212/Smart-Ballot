@@ -9,6 +9,7 @@ import { RiDeleteBin2Line } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { toast } from "react-toastify";
+import Loader from "../Loader";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -35,7 +36,9 @@ export default function AdminMainDash() {
       } catch (err) {
         toast.error("Failed to load admins");
       } finally {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       }
     };
     fetchAdmins();
@@ -62,7 +65,9 @@ export default function AdminMainDash() {
       } catch (err) {
         toast.error("Failed to load candidates");
       } finally {
-        setLoading(false);
+        setTimeout(()=>{
+          setLoading(false);
+        },500);
       }
     };
     fetchCandidates();
@@ -118,9 +123,17 @@ export default function AdminMainDash() {
       }
     }
     finally{
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     }
   };
+
+  if(loading){
+    return <div className="h-screen">
+      <Loader/>
+    </div>
+  }
   return (
     <div className="flex min-h-screen">
       <AdminSidebar className="h-full" />
