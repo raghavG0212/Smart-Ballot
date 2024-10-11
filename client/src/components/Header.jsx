@@ -32,7 +32,7 @@ export default function Header() {
       </Link>
       <div className="font-semibold italic mx-auto hidden md:block text-xl uppercase">
         <Wave
-          text="Cast Your Vote Make A Difference." 
+          text="Cast Your Vote Make A Difference."
           effect="stretch"
           effectChange={2.0}
         />
@@ -41,7 +41,7 @@ export default function Header() {
         to="/about"
         className={({ isActive }) =>
           `${
-            isActive && "text-blue-700 text-lg" 
+            isActive && "text-blue-700 text-lg"
           } text-lg mr-5 hidden lg:block hover:text-blue-600 hover:scale-110 transition duration-200 ease-in-out`
         }
       >
@@ -100,8 +100,12 @@ export default function Header() {
           </Dropdown>
         ) : (
           <Link to={isLoginPage ? "/sign-up" : "/login"}>
-            <Button className="w-13 sm:w-23 " gradientMonochrome="failure">
-              {isLoginPage ? "Sign Up" : "Login"}
+            <Button
+              className="w-13 sm:w-24 capitalize font-medium"
+              color="failure"
+              pill
+            >
+              {isLoginPage ? "register" : "login"}
             </Button>
           </Link>
         )}
