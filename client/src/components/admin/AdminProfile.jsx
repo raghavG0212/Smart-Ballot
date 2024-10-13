@@ -69,7 +69,7 @@ export default function AdminProfile() {
                 </p>
               </div>
               <div className="p-4 ">
-                <Label className="block mb-2 uppercase text-lg">Password</Label>
+                <Label className="block mb-2 uppercase text-lg">Current Password</Label>
                 <p className="text-gray-600 dark:text-gray-400">********</p>
               </div>
             </div>
@@ -112,7 +112,7 @@ export default function AdminProfile() {
                   </div>
                   <TextInput
                     id="password"
-                    type="password"
+                    type={showPassword ? "password": "text"}
                     placeholder="Your New Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
