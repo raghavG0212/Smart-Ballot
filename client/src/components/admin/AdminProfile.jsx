@@ -6,6 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import { setCurrentUser } from "../../redux/authSlice";
 import { toast } from "react-toastify";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 export default function AdminProfile() {
   const currentUser = useSelector((state) => state.auth.currentUser);
@@ -14,6 +15,7 @@ export default function AdminProfile() {
   const dispatch = useDispatch();
   const [username, setUsername] = useState(currentUser?.name || "");
   const [password, setPassword] = useState("");
+  const [showPassword,setShowPassword]= useState(true);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -111,11 +113,22 @@ export default function AdminProfile() {
                   <TextInput
                     id="password"
                     type="password"
-                    placeholder="password"
+                    placeholder="Your New Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
+                  {showPassword ? (
+                    <AiFillEyeInvisible
+                      className="absolute right-8 bottom-[102px] text-2xl cursor-pointer"
+                      onClick={() => setShowPassword((prevState) => !prevState)}
+                    />
+                  ) : (
+                    <AiFillEye
+                      className="absolute right-8 bottom-[102px] text-2xl cursor-pointer"
+                      onClick={() => setShowPassword((prevState) => !prevState)}
+                    />
+                  )}
                 </div>
                 <div className="mt-7 flex justify-center">
                   <Button

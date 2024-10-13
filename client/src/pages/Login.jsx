@@ -13,6 +13,7 @@ import {
 import { Link } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function Login() {
 
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -108,15 +110,30 @@ export default function Login() {
             <div className="mt-2 mb-4 sm:mb-0">
               <Label htmlFor="password" value="Password" className="text-md" />
             </div>
-            <TextInput
-              id="password"
-              type="password"
-              placeholder="Your password"
-              required
-              value={formData.password}
-              onChange={handleChange}
-              className="w-80 sm:w-64"
-            />
+            <div className="relative w-80 sm:w-64">
+              <input
+                id="password"
+                type={!showPassword ? "text" : "password"}
+                placeholder="Your Password"
+                required
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full pr-10 pl-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-500 focus:border-cyan-500 bg-gray-50 dark:bg-gray-700 dark:placeholder:text-gray-400 placeholder:text-[15px] placeholder:font-sans dark:border-gray-600"
+              />
+              <div className="absolute inset-y-0 right-3 flex items-center">
+                {showPassword ? (
+                  <AiFillEyeInvisible
+                    className="text-2xl cursor-pointer dark:text-black"
+                    onClick={() => setShowPassword((prevState) => !prevState)}
+                  />
+                ) : (
+                  <AiFillEye
+                    className="text-2xl cursor-pointer dark:text-black"
+                    onClick={() => setShowPassword((prevState) => !prevState)}
+                  />
+                )}
+              </div>
+            </div>
           </div>
           <div className="flex gap-2 mt-3">
             <Checkbox id="remember" className="mt-1" />

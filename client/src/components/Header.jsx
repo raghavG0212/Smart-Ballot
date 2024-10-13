@@ -14,7 +14,6 @@ export default function Header() {
   const currentUser = useSelector((state) => state.auth.currentUser);
   const isAdmin = useSelector((state) => state.auth.isAdmin);
   const { theme } = useSelector((state) => state.theme);
-  const isLoginPage = location.pathname === "/login";
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -99,13 +98,13 @@ export default function Header() {
             <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
           </Dropdown>
         ) : (
-          <Link to={isLoginPage ? "/sign-up" : "/login"}>
+          <Link to={location.pathname === "/login" ? "/sign-up" : "/login"}>
             <Button
               className="w-13 sm:w-24 capitalize font-medium"
               color="failure"
               pill
             >
-              {isLoginPage ? "register" : "login"}
+              {location.pathname === "/login" ? "register" : "login"}
             </Button>
           </Link>
         )}
