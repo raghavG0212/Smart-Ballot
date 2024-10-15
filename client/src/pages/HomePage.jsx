@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import AlreadyVoted from "./AlreadyVoted";
 import { useSelector } from "react-redux";
 import { FaCalendarAlt, FaUserAltSlash, FaUserCheck } from "react-icons/fa";
+import {Tilt} from "react-tilt";
 
 const politiciansByState = {
   "Andhra Pradesh": [
@@ -116,14 +117,21 @@ export default function HomePage() {
             <h1 className="text-center capitalize mb-10 text-5xl md:hidden custom-title text-pretty">
               Cast Your Vote, Make a Difference
             </h1>
-
-            <div className="flex justify-center">
-              <img
-                src="/main.jpg"
-                alt="vote"
-                className="rounded-full w-10/12 h-10/12 md:w-full "
-              />
-            </div>
+            <Tilt
+              options={{
+                max: 45,
+                scale: 1,
+                speed: 450,
+              }}
+            >
+              <div className="flex justify-center">
+                <img
+                  src="/main.jpg"
+                  alt="vote"
+                  className="rounded-full w-10/12 h-10/12 md:w-full "
+                />
+              </div>
+            </Tilt>
           </div>
         )}
       </div>
@@ -251,10 +259,7 @@ export default function HomePage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-4 mb-10">
-        <Card
-          className="shadow-lg bg-slate-100 capitalize"
-          horizontal
-        >
+        <Card className="shadow-lg bg-slate-100 capitalize" horizontal>
           <h2 className="text-2xl font-bold text-center mb-10">
             Eligibility for Candidates
           </h2>
@@ -293,10 +298,7 @@ export default function HomePage() {
             </div>
           </div>
         </Card>
-        <Card
-          className="shadow-lg bg-slate-100 capitalize "
-          horizontal
-        >
+        <Card className="shadow-lg bg-slate-100 capitalize " horizontal>
           <h2 className="text-2xl font-bold text-center mb-10">
             Eligibility for Voters
           </h2>
@@ -333,10 +335,7 @@ export default function HomePage() {
             </div>
           </div>
         </Card>
-        <Card
-          className="shadow-lg text-sm bg-slate-100"
-          horizontal
-        >
+        <Card className="shadow-lg text-sm bg-slate-100" horizontal>
           <h2 className="text-2xl font-bold text-center mb-1">
             Smart Ballot Updates
           </h2>
