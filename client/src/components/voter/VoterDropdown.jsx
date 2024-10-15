@@ -2,8 +2,9 @@ import { Accordion } from "flowbite-react";
 import { Link, useLocation,useNavigate } from "react-router-dom";
 import { logout } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
-import { FaPeopleRoof, FaPerson, FaArrowRight } from "react-icons/fa6";
+import { FaPerson, FaArrowRight } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import { GiVote } from "react-icons/gi";
 
 export default function VoterDropDown() {
   const location = useLocation();
@@ -13,7 +14,7 @@ export default function VoterDropDown() {
   const handleLogout = () => {
     dispatch(logout());
     toast.success("Logged out successfully.");
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -28,7 +29,7 @@ export default function VoterDropDown() {
                 location.pathname === "/voter-dashboard" ? "text-blue-800" : ""
               }`}
             >
-              <FaPeopleRoof />
+              <GiVote />
               <div className="flex justify-between w-full">
                 <div>Elections</div>
                 <div className="relative flex items-center font-bold text-red-600">

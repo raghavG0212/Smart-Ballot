@@ -19,7 +19,7 @@ export default function Header() {
   const handleLogout = () => {
     dispatch(logout());
     toast.success("Logged out successfully.");
-    navigate("/login");
+    navigate("/");
   };
 
   return (

@@ -162,12 +162,12 @@ export default function AdminMainDash() {
             <p className="text-2xl text-blue-700">{admins.length}</p>
           </Card>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 m-3 p-6">
+        <div className={`grid grid-cols-1 ${candidates.length > 0 && totalVotes > 0 && "lg:grid-cols-2"} gap-8 m-3 p-6`}>
           <Card className="bg-slate-200 shadow-lg">
             <h1 className="text-3xl font-semibold text-center mb-8 capitalize italic">
               Manage Admins
             </h1>
-            <Table className="border border-black bg-slate-100 ">
+            <Table className="border border-black bg-slate-100">
               <Table.Head>
                 <Table.HeadCell className="border-r">Name</Table.HeadCell>
                 <Table.HeadCell>Actions</Table.HeadCell>
@@ -198,12 +198,14 @@ export default function AdminMainDash() {
               </Table.Body>
             </Table>
           </Card>
-          <Card className="bg-slate-200 shadow-lg">
-            <h5 className="text-3xl font-semibold mb-4 text-center capitalize italic">
-              Votes Wagon Wheel
-            </h5>
-            {!loading && <Pie data={data} />}
-          </Card>
+          {candidates.length > 0 && totalVotes > 0 && (
+            <Card className="bg-slate-200 shadow-lg">
+              <h5 className="text-3xl font-semibold mb-4 text-center capitalize italic">
+                Votes Wagon Wheel
+              </h5>
+              {!loading && <Pie data={data} />}
+            </Card>
+          )}
         </div>
       </div>
 

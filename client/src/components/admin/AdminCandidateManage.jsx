@@ -148,13 +148,7 @@ export default function AdminDashBoard() {
       setOpenDeleteModal(false);
       toast.success(response.data.message);
     } catch (err) {
-      if (err.response?.status === 400) {
-        toast.error("Cannot delete candidate with 50% or more of total votes.");
-      } else if (err.response?.status === 404) {
-        toast.error("Candidate not found.");
-      } else {
-        toast.error(err.response?.data?.message || "Error deleting candidate");
-      }
+      toast.error(err.response?.data?.message);
     } finally {
       setLoading(false);
     }
@@ -172,7 +166,7 @@ export default function AdminDashBoard() {
       <AdminSidebar className="h-full" />
       <div className="flex flex-col flex-grow">
         <AdminDropdown />
-        <div className="">
+        <div className="min-h-screen">
           {candidates.length === 0 ? (
             <div className="flex flex-col gap-4 justify-center items-center h-40 bg-slate-300 dark:bg-slate-800 m-8 rounded-md ">
               <FaPersonCircleExclamation className="text-5xl text-red-600" />
@@ -181,7 +175,7 @@ export default function AdminDashBoard() {
               </h1>
             </div>
           ) : (
-            <div className="min-h-screen">
+            <div >
               <Table className="border-b dark:text-white">
                 <Table.Head>
                   <Table.HeadCell className="hidden lg:table-cell border-r">

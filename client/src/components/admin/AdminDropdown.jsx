@@ -4,8 +4,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HiChartPie } from "react-icons/hi";
 import { logout } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
-import { FaPeopleRoof, FaPerson, FaArrowRight } from "react-icons/fa6";
+import { FaPerson, FaArrowRight } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import { GiVote } from "react-icons/gi";
 
 export default function AdminDropdown() {
   const location = useLocation();
@@ -15,7 +16,7 @@ export default function AdminDropdown() {
   const handleLogout = () => {
     dispatch(logout());
     toast.success("Logged out successfully.");
-    navigate("/admin-login");
+    navigate("/");
   };
 
   return (
@@ -43,7 +44,7 @@ export default function AdminDropdown() {
                   : ""
               }`}
             >
-              <FaPeopleRoof />
+              <GiVote />
               <div className="flex justify-between w-full">
                 <div>Elections</div>
                 <div className="relative flex items-center font-bold text-red-600">

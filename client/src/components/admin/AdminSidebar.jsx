@@ -1,41 +1,39 @@
-import { Button, Sidebar } from "flowbite-react";
+import { Sidebar } from "flowbite-react";
 import { HiChartPie } from "react-icons/hi";
-import { FaArrowRight, FaPeopleRoof, FaPerson } from "react-icons/fa6";
-import {
-  FaRegArrowAltCircleRight,
-  FaRegArrowAltCircleLeft,
-} from "react-icons/fa";
+import { FaArrowRight, FaPerson } from "react-icons/fa6";
 import { logout } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import {GiVote} from "react-icons/gi";
 
 export default function AdminSidebar() {
   const location = useLocation();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  // const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(logout());
     toast.success("Logged out successfully.");
-    navigate("/admin-login");
+    navigate("/");
   };
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+  // const toggleSidebar = () => {
+  //   setIsSidebarOpen(!isSidebarOpen);
+  // };
 
   return (
     <div className="hidden md:block">
-      <Sidebar className={`${isSidebarOpen ? "block" : "hidden"}`}>
+      <Sidebar>
+        {/* className={`${isSidebarOpen ? "block" : "hidden"}`} */}
         <Sidebar.Items>
           <div className="flex">
             <h1 className="font-semibold ml-3">Options</h1>
-            <Button className="ml-28" onClick={toggleSidebar} outline pill>
+            {/* <Button className="ml-28" onClick={toggleSidebar} outline pill>
               <FaRegArrowAltCircleLeft />
-            </Button>
+            </Button> */}
           </div>
           <Sidebar.ItemGroup>
             <Sidebar.Item
@@ -49,7 +47,7 @@ export default function AdminSidebar() {
             <Sidebar.Item
               as={Link}
               to="/admin-candidate-management"
-              icon={FaPeopleRoof}
+              icon={GiVote}
               active={location.pathname === "/admin-candidate-management"}
             >
               <div className="flex space-x-16">
@@ -64,22 +62,26 @@ export default function AdminSidebar() {
               as={Link}
               to="/admin-profile"
               icon={FaPerson}
-              label='Admin'
+              label="Admin"
               active={location.pathname === "/admin-profile"}
             >
               Your Profile
             </Sidebar.Item>
-            <Sidebar.Item onClick={handleLogout} icon={FaArrowRight} className="cursor-pointer">
+            <Sidebar.Item
+              onClick={handleLogout}
+              icon={FaArrowRight}
+              className="cursor-pointer"
+            >
               Logout
             </Sidebar.Item>
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>
-      {!isSidebarOpen && (
+      {/* {!isSidebarOpen && (
         <Button className="m-2" size="lg" onClick={toggleSidebar} outline pill>
           <FaRegArrowAltCircleRight />
         </Button>
-      )}
+      )} */}
     </div>
   );
 }

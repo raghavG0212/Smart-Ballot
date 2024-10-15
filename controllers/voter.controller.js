@@ -3,6 +3,7 @@ const CandidateModel = require("../models/candidate.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const { errorHandler } = require("../utils/error");
 
 dotenv.config();
 
@@ -26,30 +27,28 @@ const generateVoterID = () => {
   );
 };
 
-const signup = async (req, res) => {
+const signup = async (req, res, next) => {
   try {
     const { name, dob, phoneNo, aadharNo, password, nationality } = req.body;
     const age = calculateAge(dob);
     if (age < 18) {
-      return res.status(400).json({ message: "Voter should be at least 18 years old" });
+      return next(errorHandler(400, "Voter should be at least 18 years old"));
     }
     if (nationality !== "Indian") {
-      return res.status(400).json({ message: "Nationality must be Indian" });
+      return next(errorHandler(400, "Nationality must be Indian"));
     }
     if (password.length < 8) {
-      return res
-        .status(400)
-        .json({ message: "Password should have 8 or more letters" });
+      return next(errorHandler(400, "Password should have 8 or more letters"));
     }
     if (aadharNo.length != 12) {
-      return res.status(400).json({ message: "Invalid Aadhar No" });
+      return next(errorHandler(400, "Invalid Aadhar No"));
     }
     if (!/^\d{10}$/.test(phoneNo)) {
-      return res.status(400).json({ message: "Invalid Phone No" });
+      return next(errorHandler(400, "Invalid Phone No"));
     }
     const existingVoter = await VoterModel.findOne({ aadharNo });
     if (existingVoter) {
-      return res.status(400).json({ message: "Voter already exists" });
+      return next(errorHandler(400, "Voter already exists"));
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const voterID = generateVoterID();
@@ -65,11 +64,11 @@ const signup = async (req, res) => {
     await newVoter.save();
     res.status(200).json({ message: "Voter ID created successfully", voterID });
   } catch (err) {
-    res.status(500).json({ message: "server error", error: err.message });
+    next(err);
   }
 };
 
-const login = async (req, res) => {
+const login = async (req, res, next) => {
   try {
     const { identifier, password } = req.body;
 
@@ -78,12 +77,12 @@ const login = async (req, res) => {
     });
 
     if (!voter) {
-      return res.status(400).json({ message: "Voter not registered." });
+      return next(errorHandler(404, "Voter not registered"));
     }
 
     const isPasswordValid = await bcrypt.compare(password, voter.password);
     if (!isPasswordValid) {
-      return res.status(400).json({ message: "Wrong password." });
+      return next(errorHandler(400, "Wrong password"));
     }
 
     const token = jwt.sign(
@@ -106,23 +105,23 @@ const login = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ message: "Server error", error: err.message });
+    next(err);
   }
 };
 
-const voteExecutor = async (req, res) => {
+const voteExecutor = async (req, res, next) => {
   const { voterID, candidateID } = req.body;
   try {
     const voter = await VoterModel.findOne({ voterID });
     if (!voter) {
-      return res.status(400).json({ message: "Voter ID not found" });
+     return next(errorHandler(400, "Voter ID not found"));
     }
     if (voter.voted) {
-      return res.status(400).json({ message: "You have already voted." });
+      return next(errorHandler(400, "You have already voted"));
     }
     const candidate = await CandidateModel.findById({ _id: candidateID });
     if (!candidate) {
-      return res.status(400).json({ message: "Candidate does not exist" });
+      return next(errorHandler(404, "Candidate does not exist"));
     }
 
     candidate.votes += 1;
@@ -140,23 +139,21 @@ const voteExecutor = async (req, res) => {
       message: `You successfully voted ${voter.votedTo.name}`,
     });
   } catch (err) {
-    return res
-      .status(500)
-      .json({ message: "Server error", error: err.message });
+    next(err);
   }
 };
 
-const getVoter = async (req, res) => {
+const getVoter = async (req, res, next) => {
   const { voterID } = req.query;
   try {
     const voter = await VoterModel.findOne({ voterID });
     if (!voter) {
-      return res.status(400).json({ message: "Voter not found" });
+      return next(errorHandler(404, "Voter not found"));
     }
     const { password, ...voterWithoutPassword } = voter.toObject();
     res.status(200).json(voterWithoutPassword);
   } catch (err) {
-    res.status(500).json({ message: "Server error", error: err.message });
+    next(err);
   }
 };
 
