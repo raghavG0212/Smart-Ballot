@@ -15,7 +15,6 @@ export default function VotingSuccessPage() {
     },
   });
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const currentUser = useSelector((state) => state.auth.currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
