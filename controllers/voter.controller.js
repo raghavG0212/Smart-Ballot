@@ -84,26 +84,20 @@ const login = async (req, res, next) => {
     if (!isPasswordValid) {
       return next(errorHandler(400, "Wrong password"));
     }
-
-    const token = jwt.sign(
-      { aadharNo: voter.aadharNo },
-      process.env.JWT_SECRET_KEY,
-      { expiresIn: "1h" }
-    );
-
-    res.status(200).json({
-      message: "Login successful",
-      token,
-      user: {
-        name: voter.name,
-        aadharNo: voter.aadharNo,
-        voterID: voter.voterID,
-        voted: voter.voted,
-        dob: voter.dob,
-        phoneNo: voter.phoneNo,
-        votedTo: voter.votedTo,
-      },
-    });
+    const token = jwt.sign({ id: voter._id }, process.env.JWT_SECRET_KEY);
+    res
+      .cookie("access_token", token, { httpOnly: true })
+      .status(200)
+      .json({
+        message: "Login successful",
+        user: {
+          name: voter.name,
+          voterID: voter.voterID,
+          voted: voter.voted,
+          dob: voter.dob,
+          phoneNo: voter.phoneNo,
+        },
+      });
   } catch (err) {
     next(err);
   }

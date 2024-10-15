@@ -39,13 +39,19 @@ const adminLogin = async (req, res,next) => {
     if (!correctPassword) {
       return next(errorHandler(400, "Wrong password"));
     }
-    res.status(200).json({
-      message: "Login successful",
-      user: {
-        name: isAdmin.name,
-        _id: isAdmin._id,
-      },
-    });
+     const token = jwt.sign({ id: isAdmin._id }, process.env.JWT_SECRET_KEY);
+     const expiryDate = new Date(Date.now() + 7200000);
+
+    res
+      .status(200)
+      .cookie("access_token", token, { httpOnly: true, expires: expiryDate })
+      .json({
+        message: "Login successful",
+        user: {
+          name: isAdmin.name,
+          _id: isAdmin._id,
+        },
+      });
   } catch (err) {
     next(err);
   }
