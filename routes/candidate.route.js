@@ -7,11 +7,12 @@ const {
   getAllCandidates,
 } = require("../controllers/candidate.controller");
 const router= express.Router();
+const { verifyToken } = require("../utils/verifyUser");
 
-router.post('/create-candidate',createCandidate);
-router.get("/get-candidate/:id", getCandidate);
-router.put("/update-candidate/:id", updateCandidate);
-router.delete("/delete-candidate/:id", deleteCandidate);
-router.get('/getCandidates',getAllCandidates);
+router.post('/create-candidate',verifyToken, createCandidate);
+router.get("/get-candidate/:id",verifyToken, getCandidate);
+router.put("/update-candidate/:id", verifyToken,updateCandidate);
+router.delete("/delete-candidate/:id", verifyToken,deleteCandidate);
+router.get('/getCandidates',verifyToken,getAllCandidates);
 
 module.exports= router;

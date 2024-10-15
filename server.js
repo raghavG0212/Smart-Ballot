@@ -2,15 +2,16 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const cors= require('cors');
+const cookieParser = require('cookie-parser');
 const mongoDB= require('./database/connectDB');
 const PORT = process.env.PORT || 4000;
 const path = require('path');
-// const connection= require('./database/mySqlDb');
 
 //middlewares
 dotenv.config();
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
 //database
 mongoDB();
