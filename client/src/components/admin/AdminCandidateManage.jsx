@@ -175,35 +175,37 @@ export default function AdminDashBoard() {
               </h1>
             </div>
           ) : (
-            <div >
-              <Table className="border-b dark:text-white">
+            <div>
+              <Table className="border-b dark:text-white  border-black dark:border-white">
                 <Table.Head>
-                  <Table.HeadCell className="hidden lg:table-cell border-r">
+                  <Table.HeadCell className="hidden lg:table-cell border-r  border-black dark:border-white">
                     S No.
                   </Table.HeadCell>
-                  <Table.HeadCell className="border-r">Name</Table.HeadCell>
-                  <Table.HeadCell className="border-r hidden 450px:table-cell">
+                  <Table.HeadCell className="border-r  border-black dark:border-white">
+                    Name
+                  </Table.HeadCell>
+                  <Table.HeadCell className="border-r  border-black dark:border-white hidden 450px:table-cell">
                     Party Name
                   </Table.HeadCell>
-                  <Table.HeadCell className="hidden sm:block border-r">
+                  <Table.HeadCell className="hidden sm:table-cell border-r  border-black dark:border-white">
                     Party Logo
                   </Table.HeadCell>
-                  <Table.HeadCell className="border-r">
+                  <Table.HeadCell className="border-r  border-black dark:border-white">
                     No. Of Votes
                   </Table.HeadCell>
                   <Table.HeadCell>
                     <div className="md:ml-2">Actions</div>
                   </Table.HeadCell>
                 </Table.Head>
-                <Table.Body className="divide-y">
+                <Table.Body className="divide-y divide-black dark:divide-white">
                   {candidates
                     .sort((a, b) => a.name.localeCompare(b.name))
                     .map((candidate, index) => (
                       <Table.Row key={candidate._id}>
-                        <Table.Cell className="text-lg font-bold hidden lg:table-cell align-middle border-r">
+                        <Table.Cell className="text-lg font-bold hidden lg:table-cell align-middle border-r  border-black dark:border-white">
                           {index + 1}
                         </Table.Cell>
-                        <Table.Cell className="border-r">
+                        <Table.Cell className="border-r  border-black dark:border-white">
                           <div className="flex flex-col">
                             <span className="uppercase font-semibold ">
                               {candidate.name}
@@ -213,10 +215,10 @@ export default function AdminDashBoard() {
                             </span>
                           </div>
                         </Table.Cell>
-                        <Table.Cell className="border-r hidden 450px:table-cell">
+                        <Table.Cell className="border-r hidden 450px:table-cell  border-black dark:border-white">
                           {candidate.partyName}
                         </Table.Cell>
-                        <Table.Cell className="hidden sm:table-cell border-r">
+                        <Table.Cell className="hidden sm:table-cell border-r  border-black dark:border-white">
                           <div className="ml-3 md:ml-0 880px:ml-3 h-12 w-12 flex justify-center items-center bg-white dark:border-gray-700 rounded-full">
                             <img
                               src={candidate.partyLogo}
@@ -226,7 +228,7 @@ export default function AdminDashBoard() {
                             />
                           </div>
                         </Table.Cell>
-                        <Table.Cell className="border-r">
+                        <Table.Cell className="border-r  border-black dark:border-white">
                           {candidate.votes}
                         </Table.Cell>
                         <Table.Cell>
@@ -268,42 +270,11 @@ export default function AdminDashBoard() {
               Add New Candidate
             </Button>
           </div>
-          <div className={`${candidates.length==0 && "h-72"}`}></div>
         </div>
       </div>
 
-      {/* /
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/
-/ */}
-      {/* MODALS */}
+      {/* modals */}
+      
       {/* create */}
       <Modal show={openCreateModal} onClose={() => setOpenCreateModal(false)}>
         <Modal.Header>Add New Candidate</Modal.Header>

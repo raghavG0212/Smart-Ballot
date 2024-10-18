@@ -90,30 +90,40 @@ export default function VoterDashboard() {
             </div>
           </div>
         ) : (
-          <div>
-            <Table className="w-full min-h-screen dark:text-white">
+          <div className={`${candidates.length < 2 && "min-h-screen"}`}>
+            <Table
+              className={`w-full dark:text-white ${
+                candidates.length > 1
+                  ? "min-h-screen"
+                  : "border-b border-black dark:border-white"
+              }`}
+            >
               <Table.Head>
-                <Table.HeadCell className="border-r">Name</Table.HeadCell>
-                <Table.HeadCell className="border-r">Party Name</Table.HeadCell>
-                <Table.HeadCell className="hidden sm:block border-r">
+                <Table.HeadCell className="border-r border-black dark:border-white">
+                  Name
+                </Table.HeadCell>
+                <Table.HeadCell className="border-r  border-black dark:border-white">
+                  Party Name
+                </Table.HeadCell>
+                <Table.HeadCell className="hidden sm:table-cell border-r  border-black dark:border-white">
                   Party Logo
                 </Table.HeadCell>
                 <Table.HeadCell>
                   <div>Actions</div>
                 </Table.HeadCell>
               </Table.Head>
-              <Table.Body className="divide-y">
+              <Table.Body className="divide-y divide-black dark:divide-white">
                 {candidates
                   .sort((a, b) => a.name.localeCompare(b.name))
                   .map((candidate) => (
                     <Table.Row key={candidate._id}>
-                      <Table.Cell className="uppercase font-semibold border-r">
+                      <Table.Cell className="uppercase font-semibold border-r border-black dark:border-white">
                         {candidate.name}
                       </Table.Cell>
-                      <Table.Cell className="border-r">
+                      <Table.Cell className="border-r border-black dark:border-white">
                         {candidate.partyName}
                       </Table.Cell>
-                      <Table.Cell className="hidden sm:table-cell border-r">
+                      <Table.Cell className="hidden sm:table-cell border-r border-black dark:border-white">
                         <div className="ml-3 md:ml-0 880px:ml-3 h-12 w-12 flex justify-center items-center bg-white dark:border-gray-700 rounded-full">
                           <img
                             src={candidate.partyLogo}
@@ -134,6 +144,7 @@ export default function VoterDashboard() {
                               setShowModal(true);
                               setCandidateID(candidate._id);
                             }}
+                            pill
                           >
                             Vote
                           </Button>
@@ -161,7 +172,14 @@ export default function VoterDashboard() {
               </h3>
               <div className="flex justify-center gap-8">
                 <Button color="success" onClick={handleVoteExecution}>
-                  {loading ? (<div className="flex items-center space-x-1"><Spinner/><span>Loading...</span></div>):("Yes, I'm sure")}
+                  {loading ? (
+                    <div className="flex items-center space-x-1">
+                      <Spinner />
+                      <span>Loading...</span>
+                    </div>
+                  ) : (
+                    "Yes, I'm sure"
+                  )}
                 </Button>
                 <Button color="failure" onClick={() => setShowModal(false)}>
                   No, cancel
