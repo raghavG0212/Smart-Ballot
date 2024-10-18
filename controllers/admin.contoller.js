@@ -58,23 +58,34 @@ const adminLogin = async (req, res,next) => {
 };
 
 const updateAdmin= async(req,res,next)=>{
-	const {id}= req.params;
-	const {name,password}= req.body;
 	try{
-		const hashedPassword= await bcrypt.hash(password,10);
-		const updatedAdmin= await AdminModel.findByIdAndUpdate(id,
-			{name,password:hashedPassword},
-			{new:true,runValidators:true}
-		);
+		if (req.body.password) {
+      req.body.password = bcrypt.hashSync(req.body.password, 10);
+    }
+		const updatedAdmin = await AdminModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          name: req.body.name,
+          password: req.body.password,
+        },
+      },
+      { new: true }
+    );
 		if(!updatedAdmin){
 			return next(errorHandler(404, "Admin not found"));
 		}
-		res.status(200).json({message:'Details updated successfully',admin:updatedAdmin})
+		res.status(200).json({
+      message: "Details updated successfully",
+      admin: {
+        name: updatedAdmin.name,
+        _id: updatedAdmin._id,
+      },
+    });
 	}
 	catch(err){
     next(err);
 	}
-
 }
 
 const getAllAdmins = async (req, res,next) => {

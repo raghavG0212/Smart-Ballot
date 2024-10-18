@@ -23,21 +23,19 @@ export default function VoterProfile() {
                   User Name
                 </Label>
                 <p className="text-gray-600 dark:text-gray-400">
-                  {currentUser ? currentUser.name : "Not defined"}
+                  {currentUser.name}
                 </p>
               </div>
               <div className="p-4 ">
                 <Label className="block mb-2 uppercase text-md">Voter ID</Label>
                 <p className="text-gray-600 dark:text-gray-400">
-                  {currentUser ? currentUser.voterID : "Not defined"}
+                  {currentUser.voterID}
                 </p>
               </div>
               <div className="p-4 ">
                 <Label className="block mb-2 uppercase text-md">DOB</Label>
                 <p className="text-gray-600 dark:text-gray-400">
-                  {currentUser
-                    ? moment(currentUser.dob).format("DD/MM/YYYY")
-                    : "Not defined"}
+                  { moment(currentUser.dob).format("DD/MM/YYYY")}
                 </p>
               </div>
               <div className="p-4 ">
@@ -45,7 +43,7 @@ export default function VoterProfile() {
                   Phone Number
                 </Label>
                 <p className="text-gray-600 dark:text-gray-400">
-                  {currentUser ? currentUser.phoneNo : "Not defined"}
+                  {currentUser.phoneNo}
                 </p>
               </div>
             </div>
