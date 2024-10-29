@@ -1,12 +1,15 @@
 import { Button, Navbar, Dropdown, Avatar } from "flowbite-react";
 import { Link, useLocation, NavLink, useNavigate } from "react-router-dom";
 import { Wave } from "react-animated-text";
-import { FaMoon } from "react-icons/fa";
+import { FaMoon, FaListUl } from "react-icons/fa";
 import { GoSun } from "react-icons/go";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/themeSlice";
 import { logout } from "../redux/authSlice";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import AdminDrawer from "./admin/AdminDrawer";
+import VoterDrawer from "./voter/VoterDrawer";
 
 export default function Header() {
   const location = useLocation();
@@ -15,6 +18,7 @@ export default function Header() {
   const isAdmin = useSelector((state) => state.auth.isAdmin);
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -24,11 +28,23 @@ export default function Header() {
 
   return (
     <Navbar className="border-b-8 p-4 border-teal-500 dark:border-teal-600 bg-slate-200">
-      <Link to="/">
-        <span className="p-2 bg-gradient-to-r from-orange-500 to-green-700 rounded-lg font-semibold text-white mr-1 md:text-lg lg:text-xl shadow-lg">
-          Smart Ballot
-        </span>
-      </Link>
+      <div className="gap-3 flex items-center">
+        {currentUser &&  <FaListUl
+          className="text-[28px] hover:text-blue-600 hover:scale-110 transition-all duration-200 ease-in-out md:hidden"
+          onClick={() => setIsOpen((prev) => !prev)}
+        />
+        }
+        { currentUser && isAdmin ? (
+          <AdminDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
+        ) : (
+          <VoterDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
+        )}
+        <Link to="/">
+          <span className="p-2 bg-gradient-to-r from-orange-500 to-green-700 rounded-lg font-semibold text-white mr-1 md:text-lg lg:text-xl shadow-lg">
+            Smart Ballot
+          </span>
+        </Link>
+      </div>
       <div className="font-semibold italic mx-auto hidden md:block text-xl uppercase">
         <Wave
           text="Cast Your Vote Make A Difference."

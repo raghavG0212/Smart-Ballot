@@ -3,7 +3,6 @@ import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import axios from "axios";
 import AdminSidebar from "./AdminSidebar";
-import AdminDropdown from "./AdminDropdown";
 import { useEffect, useState } from "react";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { useSelector } from "react-redux";
@@ -138,9 +137,6 @@ export default function AdminMainDash() {
     <div className="flex min-h-screen">
       <AdminSidebar className="h-full" />
       <div className="flex flex-col flex-grow h-full">
-        <div>
-          <AdminDropdown />
-        </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-6 p-4 md:p-6 italic">
           <Card className="text-center bg-slate-200 shadow-lg">
             <h5 className="text-xl font-bold">Total Candidates</h5>

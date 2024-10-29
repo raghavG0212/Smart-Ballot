@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import VoterSideBar from "./VoterSidebar";
-import VoterDropDown from "./VoterDropdown";
 import axios from "axios";
 import { useSelector,useDispatch } from "react-redux";
 import { setVoteCasted } from "../../redux/authSlice";
@@ -77,9 +76,6 @@ export default function VoterDashboard() {
     <div className="flex flex-row">
       <VoterSideBar className="h-full" />
       <div className="flex-grow border-r-2">
-        <div>
-          <VoterDropDown />
-        </div>
         {candidates.length === 0 ? (
           <div className="min-h-screen">
             <div className="flex flex-col gap-4 justify-center items-center h-40 bg-slate-300 dark:bg-slate-800 m-8 rounded-md">

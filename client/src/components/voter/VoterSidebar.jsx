@@ -3,13 +3,11 @@ import { FaArrowRight, FaPerson } from "react-icons/fa6";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
 import { toast } from "react-toastify";
 import { GiVote } from "react-icons/gi";
 
 export default function VoterSideBar() {
   const location = useLocation();
-  // const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,21 +17,11 @@ export default function VoterSideBar() {
     navigate("/");
   };
 
-  // const toggleSidebar = () => {
-  //   setIsSidebarOpen(!isSidebarOpen);
-  // };
-
   return (
     <div className="hidden md:block">
       <Sidebar>
-        {/* className={`${isSidebarOpen ? "block" : "hidden"}`} */}
         <Sidebar.Items>
-          <div className="flex">
-            <h1 className="font-semibold ml-3">Options</h1>
-            {/* <Button className="ml-28" onClick={toggleSidebar} outline pill>
-              <FaRegArrowAltCircleLeft />
-            </Button> */}
-          </div>
+          <h1 className="font-semibold ml-3">Options</h1>
           <Sidebar.ItemGroup>
             <Sidebar.Item
               as={Link}
@@ -41,7 +29,7 @@ export default function VoterSideBar() {
               icon={GiVote}
               active={location.pathname === "/voter-dashboard"}
             >
-              <div className="flex space-x-16">
+              <div className="flex justify-between">
                 <div>Elections</div>
                 <div className="relative flex items-center font-bold text-red-600">
                   <span className="mr-3 font-semibold">Live</span>
@@ -49,6 +37,7 @@ export default function VoterSideBar() {
                 </div>
               </div>
             </Sidebar.Item>
+            <div className="h-[3px] w-full bg-gradient-to-r from-slate-200 via-slate-300 to-slate-500 dark:from-slate-400 dark:via-slate-500 dark:to-slate-700 mt-2" />
             <Sidebar.Item
               as={Link}
               to="/voter-profile"
@@ -58,6 +47,7 @@ export default function VoterSideBar() {
             >
               Your Profile
             </Sidebar.Item>
+            <div className="h-[3px] w-full bg-gradient-to-r from-slate-200 via-slate-300 to-slate-500 dark:from-slate-400 dark:via-slate-500 dark:to-slate-700 mt-2" />
             <Sidebar.Item
               onClick={handleLogout}
               icon={FaArrowRight}
@@ -68,11 +58,6 @@ export default function VoterSideBar() {
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>
-      {/* {!isSidebarOpen && (
-        <Button className="m-2" onClick={toggleSidebar} outline pill>
-          <FaRegArrowAltCircleRight />
-        </Button>
-      )} */}
     </div>
   );
 }

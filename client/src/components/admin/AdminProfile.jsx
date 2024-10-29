@@ -1,6 +1,5 @@
-import { Button, Label, Modal, Spinner, TextInput } from "flowbite-react";
+import { Button, Label, Spinner, TextInput } from "flowbite-react";
 import AdminSidebar from "./AdminSidebar";
-import AdminDropdown from "./AdminDropdown";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { setCurrentUser } from "../../redux/authSlice";
@@ -50,7 +49,6 @@ export default function AdminProfile() {
     <div className="flex min-h-screen">
       <AdminSidebar className="h-full" />
       <div className="flex-grow">
-        <AdminDropdown />
         <div className="flex flex-col items-center p-3 shadow m-6 sm:m-12 border dark:border-blue-950 rounded-lg">
           <h1 className="text-center uppercase font-semibold text-4xl mt-10">
             Your profile

@@ -10,7 +10,6 @@ import {
 import { useEffect, useState } from "react";
 import { HiOutlineExclamationCircle, HiOutlinePencil } from "react-icons/hi";
 import { MdDelete } from "react-icons/md";
-import AdminDropdown from "./AdminDropdown";
 import AdminSidebar from "./AdminSidebar";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase/firebase";
@@ -165,7 +164,6 @@ export default function AdminDashBoard() {
     <div className="flex flex-row">
       <AdminSidebar className="h-full" />
       <div className="flex flex-col flex-grow">
-        <AdminDropdown />
         <div className="min-h-screen">
           {candidates.length === 0 ? (
             <div className="flex flex-col gap-4 justify-center items-center h-40 bg-slate-300 dark:bg-slate-800 m-8 rounded-md ">
