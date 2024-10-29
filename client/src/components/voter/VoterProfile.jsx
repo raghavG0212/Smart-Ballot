@@ -24,7 +24,7 @@ export default function VoterProfile() {
             <input
               id="username"
               type="text"
-              className="w-full pr-10 pl-3 py-2 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600"
+              className="450px:w-full pr-10 pl-3 py-2 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600"
               disabled
               value={currentUser.name}
             />
@@ -34,7 +34,7 @@ export default function VoterProfile() {
             <input
               id="username"
               type="text"
-              className="w-full pr-10 pl-3 py-2 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600"
+              className="450px:w-full pr-10 pl-3 py-2 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600"
               disabled
               value={currentUser.voterID}
             />
@@ -44,8 +44,8 @@ export default function VoterProfile() {
             {/* moment(currentUser.dob).format("DD/MM/YYYY") */}
             <input
               id="username"
-              type="date"
-              className="w-full pr-10 pl-3 py-2 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600"
+              type="text"
+              className="450px:w-full pr-10 pl-3 py-2 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600"
               disabled
               value={new Date(currentUser.dob).toISOString().split("T")[0]}
             />
@@ -55,7 +55,7 @@ export default function VoterProfile() {
             <input
               id="username"
               type="text"
-              className="w-full pr-10 pl-3 py-2 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600"
+              className="450px:w-full pr-10 pl-3 py-2 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600"
               disabled
               value={currentUser.phoneNo}
             />
