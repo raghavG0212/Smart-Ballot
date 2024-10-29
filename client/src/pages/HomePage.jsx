@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import AlreadyVoted from "./AlreadyVoted";
 import { useSelector } from "react-redux";
 import { FaCalendarAlt, FaUserAltSlash, FaUserCheck } from "react-icons/fa";
-import {Tilt} from "react-tilt";
 
 const politiciansByState = {
   "Andhra Pradesh": [
@@ -117,21 +116,13 @@ export default function HomePage() {
             <h1 className="text-center capitalize mb-10 text-5xl md:hidden custom-title text-pretty">
               Cast Your Vote, Make a Difference
             </h1>
-            <Tilt
-              options={{
-                max: 45,
-                scale: 1,
-                speed: 450,
-              }}
-            >
-              <div className="flex justify-center">
-                <img
-                  src="/main.jpg"
-                  alt="vote"
-                  className="rounded-full w-10/12 h-10/12 md:w-full "
-                />
-              </div>
-            </Tilt>
+            <div className="flex justify-center">
+              <img
+                src="/main.jpg"
+                alt="vote"
+                className="rounded-full w-10/12 h-10/12 md:w-full "
+              />
+            </div>
           </div>
         )}
       </div>
