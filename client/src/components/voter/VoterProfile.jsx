@@ -41,7 +41,6 @@ export default function VoterProfile() {
           </div>
           <div className="p-4 min-w-96 space-y-4 text-center">
             <Label className="block mb-2 uppercase text-md">DOB</Label>
-            {/* moment(currentUser.dob).format("DD/MM/YYYY") */}
             <input
               id="username"
               type="text"
